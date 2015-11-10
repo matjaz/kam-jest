@@ -1,0 +1,23 @@
+{
+  "name": "malca",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "./node_modules/.bin/babel-node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matjaz Lipus",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^5.8.23",
+    "express": "^4.13.3",
+    "express-graphql": "^0.4.0",
+    "graphql": "^0.4.7",
+    "moment": "^2.10.6",
+    "request": "^2.65.0"
+  },
+  "engines": {
+    "node": "4.2.1"
+  }
+}
