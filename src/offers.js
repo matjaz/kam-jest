@@ -36,13 +36,10 @@ async function findOffers(restaurantId) {
 
 
 function extractOffers(posts, parser) {
-  var offers;
-  posts.some(post => {
-    var r = parser.parse(post);
-    if (r) {
-      offers = r;
-      return true;
+  for (let post of posts) {
+    var offers = parser.parse(post);
+    if (offers) {
+      return offers;
     }
-  });
-  return offers;
+  }
 }
