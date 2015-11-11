@@ -1,5 +1,6 @@
 import express from 'express';
 import expressGraphql from 'express-graphql';
+import forky from 'forky';
 
 import Schema from './server/schema.js';
 
@@ -15,4 +16,9 @@ let server = app.listen(process.env.PORT || 3000, function () {
   let port = server.address().port;
 
   console.log('Server listening at http://%s:%s', host, port);
+});
+
+process.on('uncaughtException', function(err) {
+  console.error(err);
+  forky.disconnect();
 });
