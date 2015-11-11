@@ -1,5 +1,5 @@
 
-import {getDataSource} from './restaurants';
+import {dataSourceFactory} from './restaurants';
 
 export const DAYS = ['PONEDELJEK', 'TOREK', 'SREDA', 'ČETRTEK', 'PETEK'];
 
@@ -27,11 +27,9 @@ export async function getDailyOffers(restaurantId, args) {
 
 
 async function findOffers(restaurantId) {
-  var dataSource = getDataSource(restaurantId);
-  var args = dataSource.provider.args;
-  var provider = new dataSource.provider.fn(args[0], args[1], args[2], args[3]);
-  var posts = await provider.fetch();
-  return extractOffers(posts, new dataSource.parser);
+  var dataSource = dataSourceFactory(restaurantId);
+  var posts = await dataSource.provider.fetch();
+  return extractOffers(posts, dataSource.parser);
 }
 
 

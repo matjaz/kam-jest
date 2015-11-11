@@ -62,10 +62,18 @@ export function getRestaurants(args) {
   return restaurants;
 }
 
-export function getDataSource(restaurantId) {
+function getDataSource(restaurantId) {
   var dataSource = DataSource[restaurantId];
   if (!dataSource) {
     throw new Error(`Restaurant not found: ${restaurantId}`);
   }
   return dataSource;
+}
+
+export function dataSourceFactory(restaurantId) {
+  var {provider, parser} = getDataSource(restaurantId);
+  return {
+    provider: new provider.fn(...provider.args),
+    parser: new parser
+  };
 }
