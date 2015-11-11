@@ -22,6 +22,7 @@ export default class FacebookGraphProvider {
         if (json && json.data) {
           resolve(json.data);
         } else {
+          console.error(error, body);
           if (!error) {
             error = new Error('Invalid response');
             error.response = response;
