@@ -42,3 +42,14 @@ export function distance(lat1, lon1, lat2, lon2) {
           (1 - Math.cos((lon2 - lon1) * PI180))/2;
   return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
 }
+
+export function requiredInPair(pair) {
+  const keys = Object.keys(pair);
+  if (keys.length !== 2) {
+    throw new Error('Pair should contain exactly two items');
+  }
+  const [a, b] = [pair[keys[0]], pair[keys[1]]];
+  if (a == null && b != null || a != null && b == null) {
+    throw new Error(`required pair ${keys}`);
+  }
+}

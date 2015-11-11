@@ -13,6 +13,7 @@ import {
 
 import {getRestaurants} from '../restaurants';
 import {getDailyOffers, OfferTypes} from '../offers';
+import {requiredInPair} from '../util';
 
 const GeoPointInput = new GraphQLInputObjectType({
   name: 'GeoPointInput',
@@ -115,14 +116,3 @@ const Schema = new GraphQLSchema({
 });
 
 export default Schema;
-
-function requiredInPair(pair) {
-  const keys = Object.keys(pair);
-  if (keys.length !== 2) {
-    throw new Error('Pair should contain exactly two items');
-  }
-  const [a, b] = [pair[keys[0]], pair[keys[1]]];
-  if (a == null && b != null || a != null && b == null) {
-    throw new Error(`required pair ${keys}`);
-  }
-}
