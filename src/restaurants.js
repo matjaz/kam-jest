@@ -50,13 +50,14 @@ export function getRestaurants(args) {
       ...DataSource[id].data,
       id,
   }));
-  if (loc && distance != null) {
-    restaurants = restaurants.filter(r => {
+  if (loc) {
+    restaurants.forEach(r => {
       var {location} = r;
-      var dist = calcDistance(loc.lat, loc.lon, location.lat, location.lon);
-      r.distance = dist;
-      return dist <= distance;
+      r.distance = calcDistance(loc.lat, loc.lon, location.lat, location.lon);
     });
+    if (distance != null) {
+      restaurants = restaurants.filter(r => r.distance <= distance);
+    }
   }
   return restaurants;
 }

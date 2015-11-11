@@ -13,7 +13,6 @@ import {
 
 import {getRestaurants} from '../restaurants';
 import {getDailyOffers, OfferTypes} from '../offers';
-import {requiredInPair} from '../util';
 
 const GeoPointInput = new GraphQLInputObjectType({
   name: 'GeoPointInput',
@@ -100,10 +99,9 @@ const Query = new GraphQLObjectType({
         distance: {type: GraphQLFloat}
       },
       resolve: function(source, args) {
-        requiredInPair({
-          loc: args.loc,
-          distance: args.distance
-        });
+        if ('distance' in args && !args.loc) {
+          throw new Error('loc argument is mandatory, when using distance');
+        }
         return getRestaurants(args);
       }
     },
