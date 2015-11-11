@@ -15,23 +15,23 @@ export const OfferTypes = {
 };
 
 
-export function getDailyOffers(restaurantId, args) {
+export async function getDailyOffers(restaurantId, args) {
   var {date} = args;
-  return findOffers(restaurantId).then(offers => {
-    const dates = date ? [date] : Object.keys(offers);
-    return dates.map(date => ({
-      offers: offers[date] && offers[date].offers || [],
-      date,
-    }));
-  });
+  var offers = await findOffers(restaurantId);
+  var dates = date ? [date] : Object.keys(offers);
+  return dates.map(date => ({
+    offers: offers[date] && offers[date].offers || [],
+    date,
+  }));
 }
 
 
-function findOffers(restaurantId) {
+async function findOffers(restaurantId) {
   var dataSource = getDataSource(restaurantId);
   var args = dataSource.provider.args;
   var provider = new dataSource.provider.fn(args[0], args[1], args[2], args[3]);
-  return provider.fetch().then(posts => extractOffers(posts, new dataSource.parser));
+  var posts = await provider.fetch();
+  return extractOffers(posts, new dataSource.parser);
 }
 
 
