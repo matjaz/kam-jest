@@ -7,6 +7,7 @@ import Selih from './parsers/selih';
 import Toscana from './parsers/toscana';
 import Foglez from './parsers/foglez';
 import Strike from './parsers/strike';
+import DaNoi from './parsers/da-noi';
 
 const DataSource = {
   toscana: {
@@ -62,6 +63,20 @@ const DataSource = {
       location: {
         lat: 46.5291684,
         lon: 15.6578444
+      }
+    }
+  },
+  'da-noi': {
+    provider: {
+      fn: HttpProvider,
+      args: ['http://www.da-noi.si']
+    },
+    parser: DaNoi,
+    data: {
+      name: 'Da Noi',
+      location: {
+        lat: 46.539322, 
+        lon: 15.640531
       }
     }
   }

@@ -2,6 +2,21 @@
 import {dataSourceFactory} from './restaurants';
 
 export const DAYS = ['PONEDELJEK', 'TOREK', 'SREDA', 'ČETRTEK', 'PETEK'];
+export const ALL_DAYS = DAYS.concat('SOBOTA', 'NEDELJA');
+export const MONTHS = [
+  'JANUAR',
+  'FEBRUAR',
+  'MAREC',
+  'APRIL',
+  'MAJ',
+  'JUNIJ',
+  'JULIJ',
+  'AVGUST',
+  'SEPTEMBER',
+  'OKTOBER',
+  'NOVEMBER',
+  'DECEMBER'
+];
 
 export const OfferTypes = {
   KOSILO: 1,
