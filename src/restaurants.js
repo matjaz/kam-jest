@@ -1,10 +1,12 @@
 import {distance as calcDistance} from './util';
 
+import HttpProvider from './providers/http';
 import FacebookGraph from './providers/facebookGraph';
 
 import Selih from './parsers/selih';
 import Toscana from './parsers/toscana';
 import Foglez from './parsers/foglez';
+import Strike from './parsers/strike';
 
 const DataSource = {
   toscana: {
@@ -46,6 +48,20 @@ const DataSource = {
       location: {
         lat: 46.499744,
         lon: 15.701672
+      }
+    }
+  },
+  strike: {
+    provider: {
+      fn: HttpProvider,
+      args: ['http://www.centerstrike.si/index.php/2013-12-24-15-58-47/2013-12-24-16-01-39?tmpl=component&print=1&page=']
+    },
+    parser: Strike,
+    data: {
+      name: 'Bowling center Strike',
+      location: {
+        lat: 46.5291684,
+        lon: 15.6578444
       }
     }
   }
