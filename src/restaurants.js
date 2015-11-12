@@ -4,6 +4,7 @@ import FacebookGraph from './providers/facebookGraph';
 
 import Selih from './parsers/selih';
 import Toscana from './parsers/toscana';
+import Foglez from './parsers/foglez';
 
 const DataSource = {
   toscana: {
@@ -34,6 +35,20 @@ const DataSource = {
       }
     },
   },
+  foglez: {
+    provider: {
+      fn: FacebookGraph,
+      args: ['1374880122759255']
+    },
+    parser: Foglez,
+    data: {
+      name: 'Picerija, gril in bar Foglež',
+      location: {
+        lat: 46.499744,
+        lon: 15.701672
+      }
+    }
+  }
 };
 
 

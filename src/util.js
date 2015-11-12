@@ -2,7 +2,7 @@ import moment from 'moment';
 
 export function findDates(str) {
   // dd. mm. yyyy
-  var re = /(\d{1,2})\s?\.\s?(\d{1,2})(?:\s?\.\s?(\d{2,4}))/g;
+  var re = /(\d{1,2})\s?\.\s?(\d{1,2})(?:\s?\.\s?(\d{2,4})?)/g;
   var match;
   var dates = [];
   while (match = re.exec(str)) {
@@ -12,6 +12,9 @@ export function findDates(str) {
       month: parseFloat(match[2]) - 1,
       year: match[3] && parseFloat(match[3]) || undefined
     });
+  }
+  if (dates.length == 2 && !dates[0].year && dates[1].year) {
+    dates[0].year = dates[1].year;
   }
   return dates;
 }
