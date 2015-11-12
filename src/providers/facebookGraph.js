@@ -1,4 +1,3 @@
-import request from 'request';
 import HttpJSONProvider from './http-json';
 
 const accessToken = `${process.env.FB_APP_ID}|${process.env.FB_APP_SECRET}`;
