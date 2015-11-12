@@ -88,7 +88,7 @@ function getDataSource(restaurantId) {
 export function dataSourceFactory(restaurantId) {
   var {provider, parser} = getDataSource(restaurantId);
   return {
-    provider: new provider.fn(...provider.args),
+    provider: new provider.fn(...(provider.args || [])),
     parser: new parser
   };
 }

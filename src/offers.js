@@ -18,6 +18,9 @@ export const OfferTypes = {
 export async function getDailyOffers(restaurantId, args) {
   var {date} = args;
   var offers = await findOffers(restaurantId);
+  if (!offers) {
+    return [];
+  }
   var dates = date ? [date] : Object.keys(offers);
   return dates.map(date => ({
     offers: offers[date] && offers[date].offers || [],
@@ -34,8 +37,11 @@ async function findOffers(restaurantId) {
 
 
 function extractOffers(posts, parser) {
+  if (!Array.isArray(posts)) {
+    posts = [posts];
+  }
   for (let post of posts) {
-    var offers = parser.parse(post);
+    let offers = parser.parse(post);
     if (offers) {
       return offers;
     }
