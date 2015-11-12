@@ -99,12 +99,14 @@ const Query = new GraphQLObjectType({
         distance: {type: GraphQLFloat}
       },
       resolve: function(source, args, ast) {
-        if ('distance' in args && !args.loc) {
-          throw new Error('loc argument is mandatory, when using distance');
-        }
-        var fields = ast.fieldASTs[0].selectionSet.selections.map(selection => selection.name.value);
-        if (fields.includes('distance') && !args.loc) {
-          throw new Error('distance field requires loc argument');
+        if (!args.loc) {
+          if ('distance' in args) {
+            throw new Error('loc argument is mandatory, when using distance');
+          }
+          var fields = ast.fieldASTs[0].selectionSet.selections.map(selection => selection.name.value);
+          if (fields.includes('distance')) {
+            throw new Error('distance field requires loc argument');
+          }
         }
         return getRestaurants(args);
       }
