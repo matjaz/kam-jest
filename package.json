@@ -17,7 +17,7 @@
     "graphql": "^0.4.7",
     "html-to-text": "^1.4.0",
     "moment": "^2.10.6",
-    "request": "^2.65.0"
+    "request-promise": "^1.0.2"
   },
   "engines": {
     "node": "4.2.1"

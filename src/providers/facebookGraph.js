@@ -1,37 +1,18 @@
 import request from 'request';
+import HttpJSONProvider from './http-json';
 
 const accessToken = `${process.env.FB_APP_ID}|${process.env.FB_APP_SECRET}`;
 const graphURL = 'https://graph.facebook.com/';
 
-export default class FacebookGraphProvider {
+export default class FacebookGraphProvider extends HttpJSONProvider {
 
   constructor(pageId) {
-    this.pageId = pageId;
+    super(`${graphURL}${pageId}/posts?access_token=${accessToken}`);
   }
 
-  fetch() {
-    return new Promise((resolve, reject) => {
-      var url = `${graphURL}${this.pageId}/posts?access_token=${accessToken}`;
-      request(url, function (error, response, body) {
-        var json;
-        try {
-          json = JSON.parse(body);
-        } catch(e) {
-          console.error(e);
-        }
-        if (json && json.data) {
-          resolve(json.data);
-        } else {
-          console.error(error, body);
-          if (!error) {
-            error = new Error('Invalid response');
-            error.response = response;
-            error.body = body;
-          }
-          reject(error);
-        }
-      });
-    });
+  async fetch() {
+    let response = await super.fetch();
+    return response.data;
   }
 
 }

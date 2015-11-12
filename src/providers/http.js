@@ -1,4 +1,4 @@
-import request from 'request';
+import rp from 'request-promise';
 
 export default class HttpProvider {
 
@@ -7,20 +7,6 @@ export default class HttpProvider {
   }
 
   fetch() {
-    return new Promise((resolve, reject) => {
-      request(this.url, function (error, response, body) {
-        if (body) {
-          resolve(body);
-        } else {
-          console.error(error, body);
-          if (!error) {
-            error = new Error('Invalid response');
-            error.response = response;
-            error.body = body;
-          }
-          reject(error);
-        }
-      });
-    });
+    return rp(this.url);
   }
 }
