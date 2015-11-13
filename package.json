@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "babel-node -- --optimize_for_size --max_old_space_size=460 --gc_interval=100 src/master.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "babel-istanbul cover _mocha --report lcovonly test -- --compilers js:babel/register --recursive --root src test"
   },
   "author": "Matjaz Lipus",
   "license": "ISC",
@@ -22,5 +22,12 @@
   },
   "engines": {
     "node": "4.2.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.1.20",
+    "babel-istanbul": "^0.5.8",
+    "chai": "^3.4.1",
+    "mocha": "^2.3.3",
+    "nock": "^2.18.2"
   }
 }
