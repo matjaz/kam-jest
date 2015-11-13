@@ -21,6 +21,8 @@ export const MONTHS = [
 export const OfferTypes = {
   KOSILO: 1,
   MALICA: 2,
+  ZLICA: 3,
+  VEGE: 4,
   from(val) {
     if (typeof this[val] == 'number') {
       return this[val];
@@ -47,7 +49,9 @@ export async function getDailyOffers(restaurantId, args) {
 async function findOffers(restaurantId) {
   var dataSource = dataSourceFactory(restaurantId);
   var posts = await dataSource.provider.fetch();
-  return extractOffers(posts, dataSource.parser);
+  if (posts) {
+    return extractOffers(posts, dataSource.parser);
+  }
 }
 
 

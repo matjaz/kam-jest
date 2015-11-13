@@ -75,7 +75,7 @@ const DataSource = {
     data: {
       name: 'Da Noi',
       location: {
-        lat: 46.539322, 
+        lat: 46.539322,
         lon: 15.640531
       }
     }
