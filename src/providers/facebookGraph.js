@@ -10,8 +10,7 @@ export default class FacebookGraphProvider extends HttpJSONProvider {
   }
 
   async fetch() {
-    let response = await super.fetch();
-    return response.data;
+    return (await super.fetch()).data;
   }
 
 }
