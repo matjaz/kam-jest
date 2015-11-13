@@ -16,4 +16,9 @@ describe('dataSourceFactory', () => {
       .that.is.an.instanceof(Selih);
   });
 
+  it('should return error for invalid id', () => {
+    var fn = () => dataSourceFactory('404')
+    expect(fn).to.throw('Restaurant not found: 404');
+  });
+
 });
