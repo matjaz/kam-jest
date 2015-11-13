@@ -2,12 +2,14 @@ import {distance as calcDistance} from './util';
 
 import HttpProvider from './providers/http';
 import FacebookGraph from './providers/facebookGraph';
+import SparProvider from './providers/spar';
 
 import Selih from './parsers/selih';
 import Toscana from './parsers/toscana';
 import Foglez from './parsers/foglez';
 import Strike from './parsers/strike';
 import DaNoi from './parsers/da-noi';
+import Spar from './parsers/spar';
 
 const DataSource = {
   toscana: {
@@ -77,6 +79,19 @@ const DataSource = {
       location: {
         lat: 46.539322,
         lon: 15.640531
+      }
+    }
+  },
+  spar: {
+    provider: {
+      fn: SparProvider
+    },
+    parser: Spar,
+    data: {
+      name: 'Spar restavracija',
+      location: {
+        lat: 46.554280,
+        lon: 15.653026
       }
     }
   }
