@@ -11,6 +11,10 @@ app.use('/graphql', expressGraphql({
   graphiql: true
 }));
 
+app.get('/', function(req, res) {
+  res.send('<a href="https://github.com/matjaz/kam-jest">kam-jest</a>');
+});
+
 let server = app.listen(process.env.PORT || 3000, function () {
   let host = server.address().address;
   let port = server.address().port;
