@@ -2,7 +2,7 @@ import express from 'express';
 import expressGraphql from 'express-graphql';
 import forky from 'forky';
 
-import Schema from './server/schema.js';
+import Schema from './schema.js';
 
 var app = express();
 
