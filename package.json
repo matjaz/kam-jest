@@ -5,8 +5,9 @@
   "main": "src/server/index.js",
   "scripts": {
     "start": "babel-node -- --optimize_for_size --max_old_space_size=460 --gc_interval=100 src/server/index.js",
-    "test": "npm run lint && babel-istanbul cover _mocha --report lcovonly test -- --compilers js:babel/register --recursive --root src test",
-    "lint": "eslint src"
+    "test": "npm run lint && npm run mocha",
+    "mocha": "babel-istanbul cover _mocha --report lcovonly test -- --compilers js:babel/register --recursive --root src test",
+    "lint": "eslint src && eslint test"
   },
   "author": "Matjaz Lipus",
   "license": "ISC",
