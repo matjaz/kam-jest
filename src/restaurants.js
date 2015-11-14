@@ -101,6 +101,9 @@ const DataSource = {
 export function getRestaurants(args) {
   var {id, loc, distance} = args;
   var ids;
+  if (!loc && 'distance' in args) {
+    throw new Error('loc argument is mandatory, when using distance');
+  }
   if (id) {
     getDataSource(id); // verify id exists
     ids = [id];
