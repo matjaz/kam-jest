@@ -51,11 +51,11 @@ export default class SelihParser {
 function normalizeType(type) {
   var offerType;
   switch (type) {
-    case 'MALICE':
-      offerType = 'MALICA';
-      break;
-    case 'KOSILA':
-      offerType = 'KOSILO';
+  case 'MALICE':
+    offerType = 'MALICA';
+    break;
+  case 'KOSILA':
+    offerType = 'KOSILO';
   }
   return OfferTypes.from(offerType);
 }

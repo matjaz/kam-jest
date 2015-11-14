@@ -50,7 +50,11 @@ export default class SparParser extends PdfParser {
         } else {
           dayOffers = null;
         }
-      } else if (dayOffers && ((isMalica = line.toUpperCase().startsWith('MENU ')) || (isZlica = line.toUpperCase().startsWith('ENOLONČNICA')) || line.toUpperCase().startsWith('VEGE PONUDBA'))) {
+      } else if (dayOffers && (
+        (isMalica = line.toUpperCase().startsWith('MENU ')) || 
+        (isZlica = line.toUpperCase().startsWith('ENOLONČNICA')) || 
+        line.toUpperCase().startsWith('VEGE PONUDBA')
+      )) {
         addOffer();
         type = OfferTypes.from(isMalica ? 'MALICA' : (isZlica ? 'ZLICA' : 'VEGE'));
         state = 'hasType';

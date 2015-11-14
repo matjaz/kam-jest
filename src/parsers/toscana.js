@@ -20,7 +20,9 @@ export default class ToscanaParser {
         if (DAYS.some(day => line.toUpperCase().startsWith(day))) {
           var dates = findDates(line);
           var date = dates.length ? toISODate(dates[0]) : '-';
-          if (!week) week = {};
+          if (!week) {
+            week = {};
+          }
           let dayData = week[date] || (week[date] = {offers: []});
           dayOffers = dayData.offers;
         } else if (line && dayOffers) {

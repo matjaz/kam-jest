@@ -108,8 +108,8 @@ export function getRestaurants(args) {
     ids = Object.keys(DataSource);
   }
   var restaurants = ids.map(id => ({
-      ...DataSource[id].data,
-      id,
+    ...DataSource[id].data,
+    id,
   }));
   if (loc) {
     restaurants.forEach(r => {

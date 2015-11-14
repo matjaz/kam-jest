@@ -17,18 +17,18 @@ import {getDailyOffers, OfferTypes} from '../offers';
 const GeoPointInput = new GraphQLInputObjectType({
   name: 'GeoPointInput',
   fields: {
-    lat: { type: new GraphQLNonNull(GraphQLFloat) },
-    lon: { type: new GraphQLNonNull(GraphQLFloat) },
-    alt: { type: GraphQLFloat, defaultValue: 0 },
+    lat: {type: new GraphQLNonNull(GraphQLFloat)},
+    lon: {type: new GraphQLNonNull(GraphQLFloat)},
+    alt: {type: GraphQLFloat, defaultValue: 0},
   }
 });
 
 const GeoPoint = new GraphQLObjectType({
   name: 'GeoPoint',
   fields: {
-    lat: { type: new GraphQLNonNull(GraphQLFloat) },
-    lon: { type: new GraphQLNonNull(GraphQLFloat) },
-    alt: { type: GraphQLFloat, defaultValue: 0 },
+    lat: {type: new GraphQLNonNull(GraphQLFloat)},
+    lon: {type: new GraphQLNonNull(GraphQLFloat)},
+    alt: {type: GraphQLFloat, defaultValue: 0},
   }
 });
 
