@@ -68,6 +68,11 @@ describe('getPrice', () => {
     expect(price).to.be.equal(13.37);
   });
 
+  it('should return price with one space', () => {
+    var price = getPrice('text 13, 37E text');
+    expect(price).to.be.equal(13.37);
+  });
+
   it('should get first price', () => {
     var price = getPrice('text 13.37E text 42.15 text');
     expect(price).to.be.equal(13.37);
