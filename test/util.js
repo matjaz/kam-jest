@@ -82,12 +82,12 @@ describe('getPrice', () => {
 
 describe('getLines', () => {
 
-  it('should return an empty array on empty string', () => {
+  it('should return an array on empty string', () => {
     var lines = getLines('');
     expect(lines).to.be.eql(['']);
   });
 
-  it('should return an empty array on empty string', () => {
+  it('should return an array of lines', () => {
     var lines = getLines('first\nsecond\r\nthird line\r fourth \n');
     expect(lines).to.be.eql([
       'first',

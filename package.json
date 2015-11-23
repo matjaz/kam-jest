@@ -8,8 +8,10 @@
     "test": "npm run lint && npm run istanbul",
     "istanbul": "babel-istanbul cover _mocha --report lcovonly -- --compilers js:babel/register --recursive test",
     "mocha": "mocha --compilers js:babel/register --recursive test",
+    "mocha-watch": "npm run mocha -- --watch",
     "lint": "eslint src && eslint test"
   },
+  "homepage": "https://github.com/matjaz/kam-jest#readme",
   "author": "Matjaz Lipus",
   "license": "ISC",
   "dependencies": {
