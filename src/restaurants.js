@@ -1,4 +1,4 @@
-import {distance as calcDistance} from './util';
+import {getValue, distance as calcDistance} from './util';
 
 import HttpProvider from './providers/http';
 import FacebookGraph from './providers/facebookGraph';
@@ -104,11 +104,18 @@ export function getRestaurants(args) {
   if (!loc && 'distance' in args) {
     throw new Error('loc argument is mandatory, when using distance');
   }
+  var id = getValue(id);
   if (id) {
-    getDataSource(id); // verify id exists
-    ids = [id];
-  } else {
+    getDataSource(id.value); // verify id exists
+    if (!id.not) {
+      ids = [id.value];
+    }
+  }
+  if (!ids) {
     ids = Object.keys(DataSource);
+  }
+  if (id && id.not) {
+    ids = ids.filter(x => x !== id.value);
   }
   var restaurants = ids.map(id => ({
     ...DataSource[id].data,

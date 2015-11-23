@@ -59,7 +59,10 @@ const Restaurant = new GraphQLObjectType({
       type: new GraphQLList(RestaurantDailyOffer),
       args: {
         date: {type: GraphQLString},
-        type: {type: GraphQLString},
+        type: {
+          description: 'Include only offers of this type. Negate by prefixing with !.',
+          type: GraphQLString
+        },
       },
       resolve(source, args) {
         return getDailyOffers(source.id, args);
@@ -95,7 +98,10 @@ const Query = new GraphQLObjectType({
     restaurants: {
       type: new GraphQLList(Restaurant),
       args: {
-        id: {type: GraphQLID},
+        id: {
+          description: 'Include only restaurant with specified id. Negate by prefixing with !.',
+          type: GraphQLID
+        },
         loc: {type: GeoPointInput},
         distance: {type: GraphQLFloat}
       },
