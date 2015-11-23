@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {findDates, getPrice, getLines, toISODate, addToDate, distance, requiredInPair} from '../src/util';
+import {findDates, getPrice, getLines, toISODate, addToDate, getValue, distance, requiredInPair} from '../src/util';
 
 describe('findDates', () => {
 
@@ -128,6 +128,31 @@ describe('addToDate', () => {
       year: 2012
     }, 2);
     expect(date).to.be.equal('2012-03-02');
+  });
+
+});
+
+describe('getValue', () => {
+
+  it('should return undefined', () => {
+    var val = getValue();
+    expect(val).to.be.an('undefined');
+  });
+
+  it('should parse value', () => {
+    var val = getValue('VAL');
+    expect(val).to.be.eql({
+      value: 'VAL',
+      not: false
+    });
+  });
+
+  it('should parse negate value', () => {
+    var val = getValue('!VAL');
+    expect(val).to.be.eql({
+      value: 'VAL',
+      not: true
+    });
   });
 
 });

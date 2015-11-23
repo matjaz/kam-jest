@@ -38,6 +38,20 @@ export function addToDate(date, days) {
   return toISODate(moment(date).add(days, 'days'));
 }
 
+export function getValue(value, mapper) {
+  if (value) {
+    let not = false;
+    if (value.charAt(0) === '!') {
+      value = value.slice(1);
+      not = true;
+    }
+    return {
+      value: mapper ? mapper(value) : value,
+      not
+    };
+  }
+}
+
 const PI180 = 0.017453292519943295;    // Math.PI / 180
 export function distance(lat1, lon1, lat2, lon2) {
   var a = 0.5 - Math.cos((lat2 - lat1) * PI180)/2 + 

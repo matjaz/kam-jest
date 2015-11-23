@@ -1,4 +1,5 @@
 
+import {getValue} from './util';
 import {dataSourceFactory} from './restaurants';
 
 export const DAYS = ['PONEDELJEK', 'TOREK', 'SREDA', 'ČETRTEK', 'PETEK'];
@@ -35,7 +36,7 @@ export const OfferTypes = {
 export async function getDailyOffers(restaurantId, args) {
   var filterFn;
   var {date} = args;
-  var type = getType(args.type);
+  var type = getValue(args.type, (x) => OfferTypes.from(x));
   var allOffers = await findOffers(restaurantId);
   if (!allOffers) {
     return [];
@@ -82,19 +83,5 @@ function extractOffers(posts, parser) {
     if (offers) {
       return offers;
     }
-  }
-}
-
-function getType(type) {
-  if (type) {
-    let not = false;
-    if (type.charAt(0) === '!') {
-      type = type.slice(1);
-      not = true;
-    }
-    return {
-      value: OfferTypes.from(type),
-      not
-    };
   }
 }
