@@ -27,22 +27,40 @@ export const OfferTypes = {
     if (typeof this[val] == 'number') {
       return this[val];
     }
-    throw new Error(`Invalid enum value: ${val}`);
+    throw new Error(`Invalid offer type value: ${val}`);
   }
 };
 
 
 export async function getDailyOffers(restaurantId, args) {
+  var filterFn;
   var {date} = args;
-  var offers = await findOffers(restaurantId);
-  if (!offers) {
+  var type = getType(args.type);
+  var allOffers = await findOffers(restaurantId);
+  if (!allOffers) {
     return [];
   }
-  var dates = date ? [date] : Object.keys(offers);
-  return dates.map(date => ({
-    offers: offers[date] && offers[date].offers || [],
-    date,
-  }));
+  var dates = date ? [date] : Object.keys(allOffers);
+  if (type) {
+    filterFn = type.not ?
+      offer => {
+        return offer.type !== type.value;
+      }
+      :
+      offer => {
+        return offer.type === type.value;
+      };
+  }
+  return dates.map(date => {
+    var offers = allOffers[date] && allOffers[date].offers || [];
+    if (filterFn && offers.length) {
+      offers = offers.filter(filterFn);
+    }
+    return {
+      offers,
+      date,
+    };
+  });
 }
 
 
@@ -64,5 +82,19 @@ function extractOffers(posts, parser) {
     if (offers) {
       return offers;
     }
+  }
+}
+
+function getType(type) {
+  if (type) {
+    let not = false;
+    if (type.charAt(0) === '!') {
+      type = type.slice(1);
+      not = true;
+    }
+    return {
+      value: OfferTypes.from(type),
+      not
+    };
   }
 }

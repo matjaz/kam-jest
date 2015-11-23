@@ -59,6 +59,7 @@ const Restaurant = new GraphQLObjectType({
       type: new GraphQLList(RestaurantDailyOffer),
       args: {
         date: {type: GraphQLString},
+        type: {type: GraphQLString},
       },
       resolve(source, args) {
         return getDailyOffers(source.id, args);
