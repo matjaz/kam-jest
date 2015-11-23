@@ -11,6 +11,10 @@
     "mocha-watch": "npm run mocha -- --watch",
     "lint": "eslint src && eslint test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/matjaz/kam-jest.git"
+  },
   "homepage": "https://github.com/matjaz/kam-jest#readme",
   "author": "Matjaz Lipus",
   "license": "ISC",
