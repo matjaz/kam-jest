@@ -19,7 +19,7 @@ Restaurant daily meal offers GraphQL API
 ```graphql
 {
   restaurants (
-    # filter by restaurant
+    # filter by restaurant. Exclude by prefixing with !.
     id: "selih"
 
     # to calculate distance we need reference location
@@ -40,7 +40,7 @@ Restaurant daily meal offers GraphQL API
     
     # this will fetch live data from source
     # remove date argument to display all dates
-#     dailyOffers (date: "2015-11-13") {
+#     dailyOffers (date: "2015-11-13" type: "MALICA") {
 #       date
 #       offers {
 #         text
@@ -53,6 +53,34 @@ Restaurant daily meal offers GraphQL API
   }
 } 
 ```
+
+### Multi query
+```graphql
+{
+  r1: restaurants (id: "selih") {
+    id
+  }
+  r2: restaurants (id: "!selih") {
+    id
+  }
+}
+```
+
+## Install
+
+    npm install
+    npm start
+
+*Using `FacebookGraphProvider` you need `FB_APP_ID` & `FB_APP_SECRET` env. vars. set.*
+
+## Development
+
+    # run lint, tests & generate coverage
+    npm test
+
+    # run tests only
+    npm run mocha
+
 
 [travis-image]: https://img.shields.io/travis/matjaz/kam-jest.svg?style=flat
 [travis-url]: https://travis-ci.org/matjaz/kam-jest
