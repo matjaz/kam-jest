@@ -7,7 +7,7 @@ export default class SparProvider {
   async fetch() {
     var pdf;
     var base = await rp(URL);
-    var match = base.match(/href="(.*?pdf)" target/);
+    var match = base.match(/href="(.*?pdf)"/);
     if (match) {
       return await rp({
         uri: `https://www.spar.si${match[1]}`,
