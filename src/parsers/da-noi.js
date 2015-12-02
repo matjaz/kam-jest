@@ -10,7 +10,7 @@ export default class DaNoiParser {
     var dayOffers;
     var type;
     var price;
-    var wasTypeLine;
+    var offerText = '';
     var text = htmlToText.fromString(pageSource, {
       wordwrap: Infinity
     });
@@ -24,40 +24,50 @@ export default class DaNoiParser {
       }
     }
 
+    function addOffer() {
+      // add previous offer
+      if (!dayOffers) {
+        console.log(offerText)
+      }
+      if (dayOffers && offerText) {
+        dayOffers.push({
+          text: offerText.trim(),
+          price: price,
+          type: type,
+          // allergens: []
+        });
+        offerText = '';
+      }
+    }
+
     getLines(text).some(line => {
       line = line.trim();
       if (line.charAt(0) === '*') {
         // end
+        addOffer();
         return true;
       }
       if (ALL_DAYS.some(day => line.toUpperCase().startsWith(day.slice(0, 3)))) {
         let date = extractDate(line);
         if (date) {
+          addOffer();
           offers = offers || {};
           if (offers[date]) {
             return true;
           }
           dayOffers = [];
           offers[date] = {offers: dayOffers};
-        } else {
-          dayOffers = null;
         }
       } else if (dayOffers && (line.toUpperCase().startsWith('MALICA') || line.toUpperCase().startsWith('MENI NA ŽLICO'))) {
-        type = OfferTypes.from('MALICA');
+        addOffer();
+        type = OfferTypes.from(line.toUpperCase().startsWith('MENI NA ŽLICO') ? 'ZLICA' : 'MALICA');
         price = getPrice(line);
-        wasTypeLine = true;
       } else if (dayOffers && line.toUpperCase().startsWith('PRVI MENI')) {
+        addOffer();
         type = OfferTypes.from('KOSILO');
         price = getPrice(line);
-        wasTypeLine = true;
-      } else if (line && dayOffers && wasTypeLine) {
-        wasTypeLine = false;
-        dayOffers.push({
-          text: line,
-          price: price,
-          type: type,
-          // allergens: []
-        });
+      } else if (line && dayOffers) {
+        offerText += `${line} `;
       }
     });
     return offers;
