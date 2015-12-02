@@ -26,9 +26,6 @@ export default class DaNoiParser {
 
     function addOffer() {
       // add previous offer
-      if (!dayOffers) {
-        console.log(offerText)
-      }
       if (dayOffers && offerText) {
         dayOffers.push({
           text: offerText.trim(),
