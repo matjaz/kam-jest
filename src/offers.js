@@ -34,14 +34,35 @@ export const OfferTypes = {
 
 
 export async function getDailyOffers(restaurantId, args) {
+  var dates;
   var filterFn;
   var {date} = args;
-  var type = getValue(args.type, (x) => OfferTypes.from(x));
+  var type = getValue(args.type, x => OfferTypes.from(x));
   var allOffers = await findOffers(restaurantId);
   if (!allOffers) {
     return [];
   }
-  var dates = date ? [date] : Object.keys(allOffers);
+  if (date) {
+    dates = [date];
+  } else {
+    dates = Object.keys(allOffers);
+    // increase year in January (providers forgot to change year)
+    if (dates[dates.length - 1].slice(5, 7) === '01') {
+      var year = new Date().getFullYear();
+      var prevYear = `${year - 1}`;
+      if (dates[dates.length - 1].slice(0, 4) === prevYear) {
+        dates.forEach((date, i) => {
+          if (date.slice(0, 7) === `${prevYear}-01`) {
+            var newDate = year + date.slice(4);
+            allOffers[newDate] = allOffers[date];
+            delete allOffers[date];
+            dates[i] = newDate;
+          }
+        });
+        dates = Object.keys(allOffers);
+      }
+    }
+  }
   if (type) {
     filterFn = type.not ?
       offer => {
