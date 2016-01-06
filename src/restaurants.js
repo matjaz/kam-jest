@@ -9,6 +9,7 @@ import Toscana from './parsers/toscana';
 import Foglez from './parsers/foglez';
 import Strike from './parsers/strike';
 import DaNoi from './parsers/da-noi';
+import Miska from './parsers/miska';
 import Spar from './parsers/spar';
 
 const DataSource = {
@@ -79,6 +80,20 @@ const DataSource = {
       location: {
         lat: 46.539322,
         lon: 15.640531
+      }
+    }
+  },
+  'miska': {
+    provider: {
+      fn: HttpProvider,
+      args: ['http://www.okrepcevalnica-miska.si/']
+    },
+    parser: Miska,
+    data: {
+      name: 'Miška',
+      location: {
+        lat: 46.5225523,
+        lon: 15.6533469
       }
     }
   },
