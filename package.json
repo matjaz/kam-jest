@@ -27,7 +27,7 @@
     "html-to-text": "^1.4.0",
     "moment": "^2.10.6",
     "pdf2json": "^0.7.1",
-    "request-promise": "^1.0.2"
+    "request-promise": "^2.0.0"
   },
   "engines": {
     "node": "4.2.1"
