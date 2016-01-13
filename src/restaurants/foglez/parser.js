@@ -1,20 +1,20 @@
-import {findDates, getPrice, getLines, toISODate, addToDate} from '../util';
-import {DAYS, OfferTypes} from '../offers';
+import {findDates, getPrice, getLines, toISODate, addToDate} from '../../util';
+import {DAYS, OfferTypes} from '../../offers';
 
-const types = ['MALICE', 'KOSILA'];
+const DEFAULT_PRICE = 4.2;
 
-export default class SelihParser {
+export default class FoglezParser {
 
   isCandidate(post) {
     var message = post.message;
-    return message && message.indexOf('MALICE') !== -1;
+    return message && message.indexOf(' MALIC ') !== -1;
   }
 
   parse(post) {
     var week;
-    var type;
     var startDate;
     var dayOffers;
+    var type = OfferTypes.from('MALICA');
     if (this.isCandidate(post)) {
       var lines = getLines(post.message);
       if (lines[0].startsWith(DAYS[0])) {
@@ -23,22 +23,27 @@ export default class SelihParser {
         let dates = findDates(lines.shift());
         startDate = dates.length ? toISODate(dates[0]) : '-';
       }
-      lines.forEach(line => {
+      lines.some(line => {
         var daysIndex;
         line = line.trim();
-        if (types.includes(line.toUpperCase())) {
-          type = normalizeType(line.toUpperCase());
-        } else if ((daysIndex = DAYS.indexOf(line.toUpperCase())) !== -1) {
+        if (line.indexOf('dostavimo') !== -1) {
+          return true;
+        }
+        if ((daysIndex = DAYS.indexOf(line.toUpperCase())) !== -1) {
           let date = startDate === '-' ? '-' : addToDate(startDate, daysIndex);
           week = week || {};
           let dayData = week[date] || (week[date] = {offers: []});
           dayOffers = dayData.offers;
         } else if (line && dayOffers) {
+          let allergens = line.match(/\((.*)\)/);
+          if (allergens) {
+            allergens = allergens[1].split(',').map(x => x.trim());
+          }
           dayOffers.push({
-            text: line.replace(/^\d+\.\)\s*/, '').replace(/\s*\d.*$/, ''),
-            price: getPrice(line.slice(5)),
+            text: line.replace(/^\-\s*/, '').replace(/\s*\(.*\)*$/, ''),
+            price: DEFAULT_PRICE,
             type: type,
-            // allergens: [],
+            allergens: allergens || [],
             line: line
           });
         }
@@ -46,16 +51,4 @@ export default class SelihParser {
       return week;
     }
   }
-}
-
-function normalizeType(type) {
-  var offerType;
-  switch (type) {
-  case 'MALICE':
-    offerType = 'MALICA';
-    break;
-  case 'KOSILA':
-    offerType = 'KOSILO';
-  }
-  return OfferTypes.from(offerType);
 }

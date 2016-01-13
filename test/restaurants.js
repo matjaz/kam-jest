@@ -1,23 +1,27 @@
 import {expect} from 'chai';
 
-import {getRestaurants, dataSourceFactory} from '../src/restaurants';
+import {getRestaurant, getRestaurants} from '../src/restaurants';
 import FacebookGraphProvider from '../src/providers/facebookGraph';
-import Selih from '../src/parsers/selih';
+import Selih from '../src/restaurants/selih/parser';
 
-describe('dataSourceFactory', () => {
+describe('getRestaurant', () => {
 
   it('should return provider & parser', () => {
-    var dataSource = dataSourceFactory('selih');
-    expect(dataSource)
+    var restaurant = getRestaurant('selih');
+    expect(restaurant)
       .to.have.property('provider')
-      .that.is.an.instanceof(FacebookGraphProvider);
-    expect(dataSource)
+      .that.is.an.instanceof(Function);
+    expect(restaurant)
       .to.have.property('parser')
+      .that.is.an.instanceof(Function);
+    expect(restaurant.provider())
+      .that.is.an.instanceof(FacebookGraphProvider);
+    expect(restaurant.parser())
       .that.is.an.instanceof(Selih);
   });
 
   it('should return error for invalid id', () => {
-    var fn = () => dataSourceFactory('404');
+    var fn = () => getRestaurant('404');
     expect(fn).to.throw('Restaurant not found: 404');
   });
 

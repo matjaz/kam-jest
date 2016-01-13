@@ -1,5 +1,5 @@
-import {findDates, getPrice, getLines, toISODate} from '../util';
-import {DAYS, OfferTypes} from '../offers';
+import {findDates, getPrice, getLines, toISODate} from '../../util';
+import {DAYS, OfferTypes} from '../../offers';
 
 export default class ToscanaParser {
 

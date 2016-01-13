@@ -1,7 +1,7 @@
 import htmlToText from 'html-to-text';
 
-import {getLines, getPrice, toISODate} from '../util';
-import {ALL_DAYS, MONTHS, OfferTypes} from '../offers';
+import {getLines, getPrice, toISODate} from '../../util';
+import {ALL_DAYS, MONTHS, OfferTypes} from '../../offers';
 
 export default class DaNoiParser {
 

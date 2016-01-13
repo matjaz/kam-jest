@@ -1,6 +1,6 @@
-import PdfParser from './pdf';
-import {findDates, getPrice, toISODate} from '../util';
-import {ALL_DAYS, OfferTypes} from '../offers';
+import PdfParser from '../../parsers/pdf';
+import {findDates, getPrice, toISODate} from '../../util';
+import {ALL_DAYS, OfferTypes} from '../../offers';
 
 export default class SparParser extends PdfParser {
 

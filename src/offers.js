@@ -1,6 +1,6 @@
 
 import {getValue} from './util';
-import {dataSourceFactory} from './restaurants';
+import {getRestaurant} from './restaurants';
 
 export const DAYS = ['PONEDELJEK', 'TOREK', 'SREDA', 'ČETRTEK', 'PETEK'];
 export const ALL_DAYS = DAYS.concat('SOBOTA', 'NEDELJA');
@@ -87,10 +87,10 @@ export async function getDailyOffers(restaurantId, args) {
 
 
 async function findOffers(restaurantId) {
-  var dataSource = dataSourceFactory(restaurantId);
-  var posts = await dataSource.provider.fetch();
+  var restaurant = getRestaurant(restaurantId);
+  var posts = await restaurant.provider().fetch();
   if (posts) {
-    return extractOffers(posts, dataSource.parser);
+    return extractOffers(posts, restaurant.parser());
   }
 }
 

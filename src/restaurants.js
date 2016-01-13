@@ -1,117 +1,16 @@
+import {readdirSync} from 'fs';
 import {getValue, distance as calcDistance} from './util';
 
-import HttpProvider from './providers/http';
-import FacebookGraph from './providers/facebookGraph';
-import SparProvider from './providers/spar';
+const RESTAURANTS = readdirSync(`${__dirname}/restaurants`)
+                      .map(x => x.replace(/\.js$/, ''));
 
-import Selih from './parsers/selih';
-import Toscana from './parsers/toscana';
-import Foglez from './parsers/foglez';
-import Strike from './parsers/strike';
-import DaNoi from './parsers/da-noi';
-import Miska from './parsers/miska';
-import Spar from './parsers/spar';
-
-const DataSource = {
-  toscana: {
-    provider: {
-      fn: FacebookGraph,
-      args: ['711185312277170']
-    },
-    parser: Toscana,
-    data: {
-      name: 'Toscana',
-      location: {
-        lat: 46.5331699,
-        lon: 15.664537,
-      }
-    },
-  },
-  selih: {
-    provider: {
-      fn: FacebookGraph,
-      args: ['170953879766724']
-    },
-    parser: Selih,
-    data: {
-      name: 'Šelih',
-      location: {
-        lat: 46.5480009,
-        lon: 15.6547506,
-      }
-    },
-  },
-  foglez: {
-    provider: {
-      fn: FacebookGraph,
-      args: ['1374880122759255']
-    },
-    parser: Foglez,
-    data: {
-      name: 'Picerija, gril in bar Foglež',
-      location: {
-        lat: 46.499744,
-        lon: 15.701672
-      }
-    }
-  },
-  strike: {
-    provider: {
-      fn: HttpProvider,
-      args: ['http://www.centerstrike.si/index.php/2013-12-24-15-58-47/2013-12-24-16-01-39?tmpl=component&print=1&page=']
-    },
-    parser: Strike,
-    data: {
-      name: 'Bowling center Strike',
-      location: {
-        lat: 46.5291684,
-        lon: 15.6578444
-      }
-    }
-  },
-  'da-noi': {
-    provider: {
-      fn: HttpProvider,
-      args: ['http://www.da-noi.si']
-    },
-    parser: DaNoi,
-    data: {
-      name: 'Da Noi',
-      location: {
-        lat: 46.539322,
-        lon: 15.640531
-      }
-    }
-  },
-  'miska': {
-    provider: {
-      fn: HttpProvider,
-      args: ['http://www.okrepcevalnica-miska.si/']
-    },
-    parser: Miska,
-    data: {
-      name: 'Miška',
-      location: {
-        lat: 46.5225523,
-        lon: 15.6533469
-      }
-    }
-  },
-  spar: {
-    provider: {
-      fn: SparProvider
-    },
-    parser: Spar,
-    data: {
-      name: 'Spar restavracija',
-      location: {
-        lat: 46.554280,
-        lon: 15.653026
-      }
-    }
+export function getRestaurant(restaurantId) {
+  try {
+    return require(`./restaurants/${restaurantId}`);
+  } catch (e) {
+    throw new Error(`Restaurant not found: ${restaurantId}`);
   }
-};
-
+}
 
 export function getRestaurants(args) {
   var {id, loc, distance} = args;
@@ -121,19 +20,19 @@ export function getRestaurants(args) {
   }
   var id = getValue(id);
   if (id) {
-    getDataSource(id.value); // verify id exists
+    getRestaurant(id.value); // verify id exists
     if (!id.not) {
       ids = [id.value];
     }
   }
   if (!ids) {
-    ids = Object.keys(DataSource);
+    ids = RESTAURANTS;
   }
   if (id && id.not) {
     ids = ids.filter(x => x !== id.value);
   }
   var restaurants = ids.map(id => ({
-    ...DataSource[id].data,
+    ...getRestaurant(id).data(),
     id,
   }));
   if (loc) {
@@ -146,20 +45,4 @@ export function getRestaurants(args) {
     }
   }
   return restaurants;
-}
-
-function getDataSource(restaurantId) {
-  var dataSource = DataSource[restaurantId];
-  if (!dataSource) {
-    throw new Error(`Restaurant not found: ${restaurantId}`);
-  }
-  return dataSource;
-}
-
-export function dataSourceFactory(restaurantId) {
-  var {provider, parser} = getDataSource(restaurantId);
-  return {
-    provider: new provider.fn(...(provider.args || [])),
-    parser: new parser
-  };
 }

@@ -1,7 +1,7 @@
 import htmlToText from 'html-to-text';
 
-import {findDates, getLines, getPrice, toISODate, addToDate} from '../util';
-import {DAYS, OfferTypes} from '../offers';
+import {findDates, getLines, getPrice, toISODate, addToDate} from '../../util';
+import {DAYS, OfferTypes} from '../../offers';
 
 const DEFAULT_PRICE = 4.2;
 
