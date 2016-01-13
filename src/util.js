@@ -40,10 +40,9 @@ export function addToDate(date, days) {
 
 export function getValue(value, mapper) {
   if (value) {
-    let not = false;
-    if (value.charAt(0) === '!') {
+    let not = value.charAt(0) === '!';
+    if (not) {
       value = value.slice(1);
-      not = true;
     }
     return {
       value: mapper ? mapper(value) : value,

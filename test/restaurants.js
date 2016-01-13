@@ -40,6 +40,11 @@ describe('getRestaurants', () => {
     expect(list.length).to.equal(1);
   });
 
+  it('should exclude restaurant', () => {
+    var list = getRestaurants({id: '!selih'});
+    expect(list.map(x => x.id)).not.to.include('selih');
+  });
+
   it('should calculate distance when location is provided', () => {
     var list = getRestaurants({
       id: 'selih',
