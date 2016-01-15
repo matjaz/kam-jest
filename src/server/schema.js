@@ -5,47 +5,46 @@ import {
   GraphQLInputObjectType,
   GraphQLSchema,
   GraphQLString,
-  GraphQLInt,
   GraphQLFloat,
   GraphQLEnumType,
   GraphQLNonNull
-} from 'graphql';
+} from 'graphql'
 
-import {getRestaurants} from '../restaurants';
-import {getDailyOffers, OfferTypes} from '../offers';
+import {getRestaurants} from '../restaurants'
+import {getDailyOffers, OfferTypes} from '../offers'
 
 const GeoPointInput = new GraphQLInputObjectType({
   name: 'GeoPointInput',
   fields: {
     lat: {type: new GraphQLNonNull(GraphQLFloat)},
     lon: {type: new GraphQLNonNull(GraphQLFloat)},
-    alt: {type: GraphQLFloat, defaultValue: 0},
+    alt: {type: GraphQLFloat, defaultValue: 0}
   }
-});
+})
 
 const GeoPoint = new GraphQLObjectType({
   name: 'GeoPoint',
   fields: {
     lat: {type: new GraphQLNonNull(GraphQLFloat)},
     lon: {type: new GraphQLNonNull(GraphQLFloat)},
-    alt: {type: GraphQLFloat, defaultValue: 0},
+    alt: {type: GraphQLFloat, defaultValue: 0}
   }
-});
+})
 
 var OfferType = (() => {
-  var values = {};
+  var values = {}
   Object.keys(OfferTypes).forEach(key => {
     if (key !== 'from') {
       values[key] = {
         value: OfferTypes[key]
-      };
+      }
     }
-  });
+  })
   return new GraphQLEnumType({
     name: 'OfferType',
     values: values
-  });
-})();
+  })
+})()
 
 const Restaurant = new GraphQLObjectType({
   name: 'Restaurant',
@@ -62,14 +61,14 @@ const Restaurant = new GraphQLObjectType({
         type: {
           description: 'Include only offers of this type. Negate by prefixing with !.',
           type: GraphQLString
-        },
+        }
       },
-      resolve(source, args) {
-        return getDailyOffers(source.id, args);
+      resolve (source, args) {
+        return getDailyOffers(source.id, args)
       }
-    },
-  }),
-});
+    }
+  })
+})
 
 const RestaurantOffer = new GraphQLObjectType({
   name: 'RestaurantOffer',
@@ -78,9 +77,9 @@ const RestaurantOffer = new GraphQLObjectType({
     text: {type: new GraphQLNonNull(GraphQLString)},
     type: {type: new GraphQLNonNull(OfferType)},
     price: {type: GraphQLFloat},
-    allergens: {type: new GraphQLList(GraphQLString)},
+    allergens: {type: new GraphQLList(GraphQLString)}
   })
-});
+})
 
 const RestaurantDailyOffer = new GraphQLObjectType({
   name: 'RestaurantDailyOffer',
@@ -88,9 +87,9 @@ const RestaurantDailyOffer = new GraphQLObjectType({
   fields: {
     date: {type: GraphQLString},
     offers: {type: new GraphQLList(RestaurantOffer)},
-    special: {type: new GraphQLList(RestaurantOffer)},
-  },
-});
+    special: {type: new GraphQLList(RestaurantOffer)}
+  }
+})
 
 const Query = new GraphQLObjectType({
   name: 'RootQuery',
@@ -105,22 +104,21 @@ const Query = new GraphQLObjectType({
         loc: {type: GeoPointInput},
         distance: {type: GraphQLFloat}
       },
-      resolve: function(source, args, ast) {
+      resolve (source, args, ast) {
         if (!args.loc) {
-          var fields = ast.fieldASTs[0].selectionSet.selections.map(selection => selection.name.value);
+          var fields = ast.fieldASTs[0].selectionSet.selections.map(selection => selection.name.value)
           if (fields.includes('distance')) {
-            throw new Error('distance field requires loc argument');
+            throw new Error('distance field requires loc argument')
           }
         }
-        return getRestaurants(args);
+        return getRestaurants(args)
       }
-    },
+    }
   }
-});
-
+})
 
 const Schema = new GraphQLSchema({
-  query: Query,
-});
+  query: Query
+})
 
-export default Schema;
+export default Schema

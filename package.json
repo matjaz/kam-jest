@@ -9,7 +9,7 @@
     "coverage": "babel-node node_modules/.bin/isparta cover _mocha -- --recursive test",
     "mocha": "mocha --compilers js:babel-core/register --require babel-polyfill --recursive test",
     "mocha-watch": "npm run mocha -- --watch",
-    "lint": "eslint src && eslint test"
+    "lint": "standard"
   },
   "repository": {
     "type": "git",
@@ -38,10 +38,22 @@
     "babel-eslint": "^4.1.6",
     "babel-polyfill": "^6.3.14",
     "chai": "^3.4.1",
-    "eslint": "^1.9.0",
     "isparta": "^4.0.0",
     "mocha": "^2.3.3",
     "nock": "^5.3.1",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.2",
+    "standard": "^5.4.1"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "/node_modules/"
+    ],
+    "globals": [
+      "it",
+      "describe",
+      "beforeEach",
+      "afterEach"
+    ]
   }
 }

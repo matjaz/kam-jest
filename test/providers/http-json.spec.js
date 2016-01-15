@@ -1,36 +1,34 @@
-import nock from 'nock';
-import {expect} from 'chai';
+import nock from 'nock'
+import {expect} from 'chai'
 
-import HttpJSONProvider from '../../src/providers/http-json';
+import HttpJSONProvider from '../../src/providers/http-json'
 
 describe('Http JSON provider', () => {
-
   it('should successfuly parse JSON', (done) => {
     nock('http://www.example.com')
       .get('/')
-      .reply(200, '{"test": "ok"}');
+      .reply(200, '{"test": "ok"}')
 
     new HttpJSONProvider('http://www.example.com').fetch().then(resp => {
       expect(resp).to.eql({
         test: 'ok'
-      });
-      done();
-    });
-  });
-
+      })
+      done()
+    })
+  })
   it('should fail on invalid JSON', (done) => {
     nock('http://www.example.com')
       .get('/')
-      .reply(200, 'invalidJSON');
+      .reply(200, 'invalidJSON')
 
-    (async () => {
+    async function test () {
       try {
-        var r = await new HttpJSONProvider('http://www.example.com').fetch();
+        await new HttpJSONProvider('http://www.example.com').fetch()
       } catch (e) {
-        expect(e.name).to.equal('SyntaxError');
-        done();
+        expect(e.name).to.equal('SyntaxError')
+        done()
       }
-    })();
-  });
-
-});
+    }
+    test()
+  })
+})

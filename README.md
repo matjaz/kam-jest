@@ -1,5 +1,5 @@
 # kam-jest
-[![Build status][travis-image]][travis-url] [![Code Climate][codeclimate-image]][codeclimate-url] [![Codeship Status for matjaz/kam-jest][codeship-image]][codeship-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependencies][david-image]][david-url] [![devDependencies][david-dev-image]][david-dev-url]
+[![Build status][travis-image]][travis-url] [![Code Climate][codeclimate-image]][codeclimate-url] [![Codeship Status for matjaz/kam-jest][codeship-image]][codeship-url] [![Coverage Status][coverage-image]][coverage-url] [![js-standard-style][standard-image]][standard-url] [![Dependencies][david-image]][david-url] [![devDependencies][david-dev-image]][david-dev-url]
 
 Restaurant daily meal offers GraphQL API
 
@@ -90,6 +90,8 @@ Restaurant daily meal offers GraphQL API
 [codeship-url]: https://codeship.com/projects/115577
 [coverage-image]: https://img.shields.io/coveralls/matjaz/kam-jest/master.svg?style=flat
 [coverage-url]: https://coveralls.io/r/matjaz/kam-jest
+[standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg
+[standard-url]: http://standardjs.com
 [david-image]: https://img.shields.io/david/matjaz/kam-jest.svg?style=flat
 [david-url]: https://david-dm.org/matjaz/kam-jest
 [david-dev-image]: https://img.shields.io/david/dev/matjaz/kam-jest.svg?style=flat

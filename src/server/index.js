@@ -1,28 +1,28 @@
-import express from 'express';
-import expressGraphql from 'express-graphql';
-import forky from 'forky';
+import express from 'express'
+import expressGraphql from 'express-graphql'
+import forky from 'forky'
 
-import Schema from './schema.js';
+import Schema from './schema.js'
 
-var app = express();
+var app = express()
 
 app.use('/graphql', expressGraphql({
   schema: Schema,
   graphiql: true
-}));
+}))
 
-app.get('/', function(req, res) {
-  res.send('<a href="https://github.com/matjaz/kam-jest">kam-jest</a>');
-});
+app.get('/', function (req, res) {
+  res.send('<a href="https://github.com/matjaz/kam-jest">kam-jest</a>')
+})
 
 let server = app.listen(process.env.PORT || 3000, function () {
-  let host = server.address().address;
-  let port = server.address().port;
+  let host = server.address().address
+  let port = server.address().port
 
-  console.log('Server listening at http://%s:%s', host, port);
-});
+  console.log('Server listening at http://%s:%s', host, port)
+})
 
-process.on('uncaughtException', function(err) {
-  console.error(err);
-  forky.disconnect();
-});
+process.on('uncaughtException', function (err) {
+  console.error(err)
+  forky.disconnect()
+})

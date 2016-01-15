@@ -1,12 +1,12 @@
-import rp from 'request-promise';
+import rp from 'request-promise'
 
 export default class HttpProvider {
 
-  constructor(url) {
-    this.url = url;
+  constructor (url) {
+    this.url = url
   }
 
-  fetch() {
-    return rp(this.url);
+  fetch () {
+    return rp(this.url)
   }
 }
