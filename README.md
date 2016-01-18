@@ -81,6 +81,10 @@ Restaurant daily meal offers GraphQL API
     # run tests only
     npm run mocha
 
+## GUI
+
+There is a [GUI with restaurants & voting][gui-url] using this service.
+
 
 [travis-image]: https://img.shields.io/travis/matjaz/kam-jest/master.svg?style=flat
 [travis-url]: https://travis-ci.org/matjaz/kam-jest
@@ -96,3 +100,4 @@ Restaurant daily meal offers GraphQL API
 [david-url]: https://david-dm.org/matjaz/kam-jest
 [david-dev-image]: https://img.shields.io/david/dev/matjaz/kam-jest.svg?style=flat
 [david-dev-url]: https://david-dm.org/matjaz/kam-jest#info=devDependencies
+[gui-url]: https://github.com/springfield/wheretoeat
