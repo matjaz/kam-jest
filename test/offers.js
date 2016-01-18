@@ -115,7 +115,6 @@ describe('getDailyOffers', () => {
     var res = await getDailyOffers('test', {
       type: '!KOSILO'
     })
-    console.log(res)
     expect(res.reduce((sum, dailyOffer) => sum + dailyOffer.offers.length, 0))
       .to.equal(1)
     done()
