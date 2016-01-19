@@ -5,6 +5,38 @@ const RESTAURANTS = readdirSync(`${__dirname}/restaurants`)
                       .map(x => x.replace(/\.js$/, ''))
 
 export function getRestaurant (restaurantId) {
+  // provider|parser
+  // provider(arg1 arg2)|parser
+  var m = restaurantId.match(/^(\w+)(?:\(([^)]+)\))?\|(\w+)$/)
+  if (m) {
+    try {
+      var Provider = require(`./providers/${m[1]}`).default
+    } catch (e) {
+      throw new Error(`Unknown provider ${m[1]}`)
+    }
+    try {
+      var Parser = require(`./parsers/${m[3]}`).default
+    } catch (e) {
+      throw new Error(`Unknown parser ${m[3]}`)
+    }
+    return {
+      provider () {
+        return new Provider(...(m[2] || '').split(' '))
+      },
+      parser () {
+        return new Parser()
+      },
+      async data () {
+        if (Parser.prototype.parseData) {
+          var body = await this.provider().fetch()
+          return this.parser().parseData(body)
+        }
+        return {
+          name: m[0]
+        }
+      }
+    }
+  }
   try {
     return require(`./restaurants/${restaurantId}`)
   } catch (e) {
@@ -12,7 +44,7 @@ export function getRestaurant (restaurantId) {
   }
 }
 
-export function getRestaurants (args) {
+export async function getRestaurants (args) {
   var {id, loc, distance} = args
   var ids
   if (!loc && 'distance' in args) {
@@ -20,7 +52,6 @@ export function getRestaurants (args) {
   }
   id = getValue(id)
   if (id) {
-    getRestaurant(id.value) // verify id exists
     if (!id.not) {
       ids = [id.value]
     }
@@ -31,8 +62,9 @@ export function getRestaurants (args) {
   if (id && id.not) {
     ids = ids.filter(x => x !== id.value)
   }
-  var restaurants = ids.map(id => ({
-    ...getRestaurant(id).data(),
+  var data = await Promise.all(ids.map(id => getRestaurant(id).data()))
+  var restaurants = ids.map((id, i) => ({
+    ...data[i],
     id
   }))
   if (loc) {
