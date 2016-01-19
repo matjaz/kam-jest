@@ -1,4 +1,4 @@
-import {findDates, getPrice, getLines, toISODate, addToDate} from '../../util'
+import {findDatesISO, getPrice, getLines, toISODate, addToDate} from '../../util'
 import {DAYS, OfferTypes} from '../../offers'
 
 const types = ['MALICE', 'KOSILA']
@@ -20,8 +20,8 @@ export default class SelihParser {
       if (lines[0].startsWith(DAYS[0])) {
         startDate = toISODate(post.created_time)
       } else {
-        let dates = findDates(lines.shift())
-        startDate = dates.length ? toISODate(dates[0]) : '-'
+        let dates = findDatesISO(lines.shift())
+        startDate = dates.length ? dates[0] : '-'
       }
       lines.forEach(line => {
         var daysIndex

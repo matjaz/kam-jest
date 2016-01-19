@@ -1,15 +1,16 @@
 import cheerio from 'cheerio'
 
-import {findDates, toISODate, getPrice} from '../util'
+import {findDatesISO, getPrice} from '../util'
 import {OfferTypes} from '../offers'
 
 export default class GostilneParser {
+
   parse (body) {
     var offers
     var $ = cheerio.load(body)
-    var dates = findDates($('.restaurant_card .sklop span').text())
+    var dates = findDatesISO($('.restaurant_card .sklop span').text())
     if (dates.length) {
-      var date = toISODate(dates[0])
+      var date = dates[0]
       var dayOffers = []
       var offer
       var type
@@ -51,4 +52,5 @@ export default class GostilneParser {
     }
     return data
   }
+
 }

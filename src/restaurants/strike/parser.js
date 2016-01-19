@@ -1,6 +1,6 @@
 import htmlToText from 'html-to-text'
 
-import {findDates, getLines, getPrice, toISODate, addToDate} from '../../util'
+import {findDatesISO, getLines, getPrice, addToDate} from '../../util'
 import {DAYS, OfferTypes} from '../../offers'
 
 const DEFAULT_PRICE = 4.2
@@ -25,8 +25,8 @@ export default class StrikeParser {
         text = text.slice(pos)
       }
       var lines = getLines(text)
-      var dates = findDates(lines.shift())
-      var startDate = dates.length ? toISODate(dates[0]) : '-'
+      var dates = findDatesISO(lines.shift())
+      var startDate = dates.length ? dates[0] : '-'
       var priceResult = text.match(/=\s*(\d+,\d{2})€/)
       var price = priceResult && getPrice(priceResult[0]) || DEFAULT_PRICE
       lines.some(line => {

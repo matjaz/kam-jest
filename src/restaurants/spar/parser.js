@@ -1,5 +1,5 @@
 import PdfParser from '../../parsers/pdf'
-import {findDates, getPrice, toISODate} from '../../util'
+import {findDatesISO, getPrice} from '../../util'
 import {ALL_DAYS, OfferTypes} from '../../offers'
 
 export default class SparParser extends PdfParser {
@@ -36,10 +36,10 @@ export default class SparParser extends PdfParser {
         return true
       }
       if (ALL_DAYS.some(day => line.toUpperCase().startsWith(day))) {
-        let dates = findDates(line)
+        let dates = findDatesISO(line)
         if (dates.length) {
           addOffer()
-          var date = toISODate(dates[0])
+          var date = dates[0]
           offers = offers || {}
           if (offers[date]) {
             return true

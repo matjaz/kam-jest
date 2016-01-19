@@ -1,4 +1,4 @@
-import {findDates, getPrice, getLines, toISODate} from '../../util'
+import {findDatesISO, getPrice, getLines} from '../../util'
 import {DAYS, OfferTypes} from '../../offers'
 
 export default class ToscanaParser {
@@ -18,8 +18,8 @@ export default class ToscanaParser {
           return true
         }
         if (DAYS.some(day => line.toUpperCase().startsWith(day))) {
-          var dates = findDates(line)
-          var date = dates.length ? toISODate(dates[0]) : '-'
+          var dates = findDatesISO(line)
+          var date = dates.length ? dates[0] : '-'
           if (!week) {
             week = {}
           }

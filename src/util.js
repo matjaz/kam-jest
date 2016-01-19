@@ -19,6 +19,10 @@ export function findDates (str) {
   return dates
 }
 
+export function findDatesISO (str) {
+  return findDates(str).map(toISODate)
+}
+
 export function getPrice (line) {
   var match = line.match(/\d+(?:[,.]\s?\d{2})?/)
   if (match) {

@@ -1,6 +1,6 @@
 import htmlToText from 'html-to-text'
 
-import {getLines, getPrice, toISODate, findDates} from '../../util'
+import {getLines, getPrice, findDatesISO} from '../../util'
 import {ALL_DAYS, OfferTypes} from '../../offers'
 
 export default class DaNoiParser {
@@ -50,9 +50,9 @@ export default class DaNoiParser {
       }
       if (ALL_DAYS.some(day => line.toUpperCase().includes(day.slice(0, 4)))) {
         allergens = undefined
-        let dates = findDates(line)
+        let dates = findDatesISO(line)
         if (dates.length) {
-          var date = toISODate(dates[0])
+          var date = dates[0]
           offers = offers || {}
           if (offers[date]) {
             return true

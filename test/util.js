@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 
-import {findDates, getPrice, getLines, toISODate, addToDate, getValue, distance, requiredInPair} from '../src/util'
+import {findDates, findDatesISO, getPrice, getLines, toISODate, addToDate, getValue, distance, requiredInPair} from '../src/util'
 
 describe('findDates', () => {
   it('should return empty array on empty string', () => {
@@ -51,6 +51,13 @@ describe('findDates', () => {
 
     dates = findDates('MALICE Od 28.9,2015')
     expect(dates).to.eql([])
+  })
+})
+
+describe('findDatesISO', () => {
+  it('should find and return ISO date', () => {
+    var dates = findDatesISO('KOSILA 2.11.2015\n')
+    expect(dates).to.eql(['2015-11-02'])
   })
 })
 
