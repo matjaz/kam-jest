@@ -20,11 +20,19 @@ describe('OfferTypes', () => {
   it('should map string to OfferType', () => {
     expect(OfferTypes.from('KOSILO')).to.equal(1)
   })
+
   it('should throw error on unknow type', () => {
     var fn = () => {
       OfferTypes.from('404')
     }
     expect(fn).to.throw('Invalid offer type value: 404')
+  })
+
+  it('should not throw error if lax', () => {
+    var fn = () => {
+      OfferTypes.from('404', true)
+    }
+    expect(fn).not.to.throw()
   })
 })
 

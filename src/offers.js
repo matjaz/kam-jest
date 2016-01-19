@@ -23,11 +23,13 @@ export const OfferTypes = {
   MALICA: 2,
   ZLICA: 3,
   VEGE: 4,
-  from (val) {
+  from (val, lax) {
     if (typeof this[val] === 'number') {
       return this[val]
     }
-    throw new Error(`Invalid offer type value: ${val}`)
+    if (!lax) {
+      throw new Error(`Invalid offer type value: ${val}`)
+    }
   }
 }
 
@@ -45,7 +47,7 @@ export async function getDailyOffers (restaurantId, args) {
   } else {
     dates = Object.keys(allOffers)
     // increase year in January (providers forgot to change year)
-    if (dates[dates.length - 1].slice(5, 7) === '01') {
+    if (dates.length && dates[dates.length - 1].slice(5, 7) === '01') {
       var year = new Date().getFullYear()
       var prevYear = `${year - 1}`
       if (dates[dates.length - 1].slice(0, 4) === prevYear) {

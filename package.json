@@ -5,7 +5,8 @@
   "main": "src/server/index.js",
   "scripts": {
     "start": "babel-node -- --optimize_for_size --max_old_space_size=460 --gc_interval=100 src/server/index.js",
-    "test": "npm run lint && npm run coverage",
+    "pretest": "npm run lint",
+    "test": "npm run coverage",
     "coverage": "babel-node node_modules/.bin/isparta cover _mocha -- --recursive test",
     "mocha": "mocha --compilers js:babel-core/register --require babel-polyfill --recursive test",
     "mocha-watch": "npm run mocha -- --watch",
