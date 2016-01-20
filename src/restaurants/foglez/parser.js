@@ -1,7 +1,7 @@
 import {findDatesISO, getLines, toISODate, addToDate} from '../../util'
 import {DAYS, OfferTypes} from '../../offers'
 
-const DEFAULT_PRICE = 4.2
+const DEFAULT_PRICE = 4.5
 
 export default class FoglezParser {
 
