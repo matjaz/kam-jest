@@ -49,6 +49,17 @@ describe('findDates', () => {
       year: 2015
     }])
 
+    dates = findDates('OD 1.2 - 5.2.2016 med')
+    expect(dates).to.eql([{
+      day: 1,
+      month: 1,
+      year: 2016
+    }, {
+      day: 5,
+      month: 1,
+      year: 2016
+    }])
+
     dates = findDates('MALICE Od 28.9,2015')
     expect(dates).to.eql([])
   })
