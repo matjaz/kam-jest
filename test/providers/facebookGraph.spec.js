@@ -10,7 +10,7 @@ describe('Http provider', () => {
       .query(true)
       .reply(200, '{"data":{"test":"ok"}}')
 
-    new FacebookGraphProvider('1337').fetch().then(resp => {
+    new FacebookGraphProvider('1337').fetch().then((resp) => {
       expect(resp).to.eql({
         test: 'ok'
       })

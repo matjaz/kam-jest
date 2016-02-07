@@ -33,7 +33,7 @@ const GeoPoint = new GraphQLObjectType({
 
 var OfferType = (() => {
   var values = {}
-  Object.keys(OfferTypes).forEach(key => {
+  Object.keys(OfferTypes).forEach((key) => {
     if (key !== 'from') {
       values[key] = {
         value: OfferTypes[key]
@@ -106,7 +106,7 @@ const Query = new GraphQLObjectType({
       },
       resolve (source, args, ast) {
         if (!args.loc) {
-          var fields = ast.fieldASTs[0].selectionSet.selections.map(selection => selection.name.value)
+          var fields = ast.fieldASTs[0].selectionSet.selections.map((selection) => selection.name.value)
           if (fields.includes('distance')) {
             throw new Error('distance field requires loc argument')
           }

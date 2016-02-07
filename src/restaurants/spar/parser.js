@@ -28,14 +28,14 @@ export default class SparParser extends PdfParser {
       }
     }
 
-    lines.some(line => {
+    lines.some((line) => {
       line = line.trim()
       if (line.toUpperCase().startsWith('TEDEN ')) {
         // end
         addOffer()
         return true
       }
-      if (ALL_DAYS.some(day => line.toUpperCase().startsWith(day))) {
+      if (ALL_DAYS.some((day) => line.toUpperCase().startsWith(day))) {
         let dates = findDatesISO(line)
         if (dates.length) {
           addOffer()

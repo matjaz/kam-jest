@@ -38,7 +38,7 @@ export default class DaNoiParser {
       }
     }
 
-    getLines(text).some(line => {
+    getLines(text).some((line) => {
       line = line.trim()
       if (!line) {
         // skip
@@ -48,7 +48,7 @@ export default class DaNoiParser {
         // end
         return true
       }
-      if (ALL_DAYS.some(day => line.toUpperCase().includes(day.slice(0, 4)))) {
+      if (ALL_DAYS.some((day) => line.toUpperCase().includes(day.slice(0, 4)))) {
         allergens = undefined
         let dates = findDatesISO(line)
         if (dates.length) {
@@ -65,7 +65,7 @@ export default class DaNoiParser {
         price = getPrice(line.slice(-10))
         offerText += `${line.replace(/(^\d+[.)]*\s*)|(\s*\d+,\d\d.+$)/g, '')} `
       } else if (line.includes('alergen')) {
-        allergens = line.slice(18, -1).split(',').map(x => x.trim())
+        allergens = line.slice(18, -1).split(',').map((x) => x.trim())
       }
     })
     addOffer()

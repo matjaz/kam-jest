@@ -23,7 +23,7 @@ export default class FoglezParser {
         let dates = findDatesISO(lines.shift())
         startDate = dates.length ? dates[0] : '-'
       }
-      lines.some(line => {
+      lines.some((line) => {
         var daysIndex
         line = line.trim()
         if (line.indexOf('dostavimo') !== -1) {
@@ -37,7 +37,7 @@ export default class FoglezParser {
         } else if (line && dayOffers) {
           let allergens = line.match(/\((.*)\)/)
           if (allergens) {
-            allergens = allergens[1].split(',').map(x => x.trim())
+            allergens = allergens[1].split(',').map((x) => x.trim())
           }
           dayOffers.push({
             text: line.replace(/^\-\s*/, '').replace(/\s*\(.*\)*$/, ''),

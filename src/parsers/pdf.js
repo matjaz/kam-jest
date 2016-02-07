@@ -23,7 +23,7 @@ export default class PdfParser {
     var lines = []
     for (let page of parsedPdf.Pages) {
       for (let text of page.Texts) {
-        lines.push(text.R.map(o => decodeURIComponent(o.T)).join(' ').trim())
+        lines.push(text.R.map((o) => decodeURIComponent(o.T)).join(' ').trim())
       }
     }
     return lines

@@ -36,14 +36,14 @@ export default class DaNoiParser {
       }
     }
 
-    getLines(text).some(line => {
+    getLines(text).some((line) => {
       line = line.trim()
       if (line.charAt(0) === '*') {
         // end
         addOffer()
         return true
       }
-      if (ALL_DAYS.some(day => line.toUpperCase().startsWith(day.slice(0, 3)))) {
+      if (ALL_DAYS.some((day) => line.toUpperCase().startsWith(day.slice(0, 3)))) {
         let date = extractDate(line)
         if (date) {
           addOffer()

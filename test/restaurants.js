@@ -53,26 +53,26 @@ describe('getRestaurant', () => {
 })
 
 describe('getRestaurants', () => {
-  it('should get all restaurants', async (done) => {
+  it('should get all restaurants', async function (done) {
     var list = await getRestaurants({})
     expect(list).to.be.an('array')
     expect(list.length).to.be.above(5)
     done()
   })
 
-  it('should return only one restaurant', async (done) => {
+  it('should return only one restaurant', async function (done) {
     var list = await getRestaurants({id: 'selih'})
     expect(list.length).to.equal(1)
     done()
   })
 
-  it('should exclude restaurant', async (done) => {
+  it('should exclude restaurant', async function (done) {
     var list = await getRestaurants({id: '!selih'})
-    expect(list.map(x => x.id)).not.to.include('selih')
+    expect(list.map((x) => x.id)).not.to.include('selih')
     done()
   })
 
-  it('should calculate distance when location is provided', async (done) => {
+  it('should calculate distance when location is provided', async function (done) {
     var list = await getRestaurants({
       id: 'selih',
       loc: {
@@ -87,7 +87,7 @@ describe('getRestaurants', () => {
     done()
   })
 
-  it('should filter by lesser distance', async (done) => {
+  it('should filter by lesser distance', async function (done) {
     var list = await getRestaurants({
       loc: {
         lat: 46.522425,
@@ -96,7 +96,7 @@ describe('getRestaurants', () => {
       distance: 2
     })
     expect(list.length).is.above(1)
-    list.forEach(r => {
+    list.forEach((r) => {
       expect(r)
         .to.have.property('distance')
         .that.is.below(2)
@@ -104,7 +104,7 @@ describe('getRestaurants', () => {
     done()
   })
 
-  it('should throw error for invalid id', async (done) => {
+  it('should throw error for invalid id', async function (done) {
     try {
       await getRestaurants({id: '404'})
     } catch (e) {
@@ -113,7 +113,7 @@ describe('getRestaurants', () => {
     }
   })
 
-  it('should throw error when filtering by distance and loc is missing', async (done) => {
+  it('should throw error when filtering by distance and loc is missing', async function (done) {
     try {
       await getRestaurants({
         distance: 0

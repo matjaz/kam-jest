@@ -9,7 +9,7 @@ describe('Gostilne provider', () => {
       .get('/test.html')
       .reply(200, 'ok')
 
-    new GostilneProvider('test').fetch().then(resp => {
+    new GostilneProvider('test').fetch().then((resp) => {
       expect(resp).to.equal('ok')
       done()
     })

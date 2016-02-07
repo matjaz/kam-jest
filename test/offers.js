@@ -86,7 +86,7 @@ describe('getDailyOffers', () => {
     restaurants.getRestaurant.restore()
   })
 
-  it('should get simple', async (done) => {
+  it('should get simple', async function (done) {
     var res = await getDailyOffers('test', {
       date: '0000-00-00',
       type: 'KOSILO'
@@ -96,30 +96,30 @@ describe('getDailyOffers', () => {
     done()
   })
 
-  it('should fix January', async (done) => {
+  it('should fix January', async function (done) {
     var year = new Date().getFullYear()
     parseData[`${year - 1}-01-01`] = parseData['0000-01-01']
     delete parseData['0000-01-01']
     var res = await getDailyOffers('test', {})
-    expect(res.map(x => x.date)).to.eql(['0000-00-00', `${year}-01-01`])
+    expect(res.map((x) => x.date)).to.eql(['0000-00-00', `${year}-01-01`])
     done()
   })
 
-  it('should not fix January', async (done) => {
+  it('should not fix January', async function (done) {
     var res = await getDailyOffers('test', {})
-    expect(res.map(x => x.date)).to.eql(['0000-00-00', `0000-01-01`])
+    expect(res.map((x) => x.date)).to.eql(['0000-00-00', '0000-01-01'])
     done()
   })
 
-  it('should not check January issue', async (done) => {
+  it('should not check January issue', async function (done) {
     parseData['0000-00-01'] = parseData['0000-01-01']
     delete parseData['0000-01-01']
     var res = await getDailyOffers('test', {})
-    expect(res.map(x => x.date)).to.eql(['0000-00-00', `0000-00-01`])
+    expect(res.map((x) => x.date)).to.eql(['0000-00-00', '0000-00-01'])
     done()
   })
 
-  it('should exclude type', async (done) => {
+  it('should exclude type', async function (done) {
     var res = await getDailyOffers('test', {
       type: '!KOSILO'
     })

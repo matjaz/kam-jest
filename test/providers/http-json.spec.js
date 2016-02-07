@@ -9,7 +9,7 @@ describe('Http JSON provider', () => {
       .get('/')
       .reply(200, '{"test": "ok"}')
 
-    new HttpJSONProvider('http://www.example.com').fetch().then(resp => {
+    new HttpJSONProvider('http://www.example.com').fetch().then((resp) => {
       expect(resp).to.eql({
         test: 'ok'
       })

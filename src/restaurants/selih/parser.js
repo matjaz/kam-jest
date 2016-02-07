@@ -23,7 +23,7 @@ export default class SelihParser {
         let dates = findDatesISO(lines.shift())
         startDate = dates.length ? dates[0] : '-'
       }
-      lines.forEach(line => {
+      lines.forEach((line) => {
         var daysIndex
         line = line.trim()
         if (types.includes(line.toUpperCase())) {

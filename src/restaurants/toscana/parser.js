@@ -12,12 +12,12 @@ export default class ToscanaParser {
     var week
     var dayOffers
     if (this.isCandidate(post)) {
-      getLines(post.message).some(line => {
+      getLines(post.message).some((line) => {
         line = line.trim()
         if (line.startsWith('Posebna')) {
           return true
         }
-        if (DAYS.some(day => line.toUpperCase().startsWith(day))) {
+        if (DAYS.some((day) => line.toUpperCase().startsWith(day))) {
           var dates = findDatesISO(line)
           var date = dates.length ? dates[0] : '-'
           if (!week) {

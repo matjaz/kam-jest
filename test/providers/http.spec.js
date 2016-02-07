@@ -9,7 +9,7 @@ describe('Http provider', () => {
       .get('/')
       .reply(200, 'ok')
 
-    new HttpProvider('http://www.example.com').fetch().then(resp => {
+    new HttpProvider('http://www.example.com').fetch().then((resp) => {
       expect(resp).to.equal('ok')
       done()
     })
@@ -19,7 +19,7 @@ describe('Http provider', () => {
       .get('/')
       .reply(404)
 
-    new HttpProvider('http://www.example.com').fetch().catch(err => {
+    new HttpProvider('http://www.example.com').fetch().catch((err) => {
       expect(err.statusCode).to.equal(404)
       done()
     })

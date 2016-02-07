@@ -29,7 +29,7 @@ export default class StrikeParser {
       var startDate = dates.length ? dates[0] : '-'
       var priceResult = text.match(/=\s*(\d+,\d{2})€/)
       var price = priceResult && getPrice(priceResult[0]) || DEFAULT_PRICE
-      lines.some(line => {
+      lines.some((line) => {
         var daysIndex
         line = line.trim()
         if (line.toUpperCase().indexOf('STALNA') !== -1) {
@@ -43,7 +43,7 @@ export default class StrikeParser {
         } else if (line && dayOffers && line.match(/^\d/)) {
           let allergens = line.match(/\((.*)\)/)
           if (allergens) {
-            allergens = allergens[1].split(',').map(x => x.trim())
+            allergens = allergens[1].split(',').map((x) => x.trim())
           }
           dayOffers.push({
             text: line.replace(/^\d+\.\s*/, '').replace(/\s*\(.*\)*$/, ''),

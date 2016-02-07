@@ -2,7 +2,7 @@ import {readdirSync} from 'fs'
 import {getValue, distance as calcDistance} from './util'
 
 const RESTAURANTS = readdirSync(`${__dirname}/restaurants`)
-                      .map(x => x.replace(/\.js$/, ''))
+                      .map((x) => x.replace(/\.js$/, ''))
 
 export function getRestaurant (restaurantId) {
   // provider|parser
@@ -60,20 +60,20 @@ export async function getRestaurants (args) {
     ids = RESTAURANTS
   }
   if (id && id.not) {
-    ids = ids.filter(x => x !== id.value)
+    ids = ids.filter((x) => x !== id.value)
   }
-  var data = await Promise.all(ids.map(id => getRestaurant(id).data()))
+  var data = await Promise.all(ids.map((id) => getRestaurant(id).data()))
   var restaurants = ids.map((id, i) => ({
     ...data[i],
     id
   }))
   if (loc) {
-    restaurants.forEach(r => {
+    restaurants.forEach((r) => {
       var {location} = r
       r.distance = calcDistance(loc.lat, loc.lon, location.lat, location.lon)
     })
     if (distance != null) {
-      restaurants = restaurants.filter(r => r.distance <= distance)
+      restaurants = restaurants.filter((r) => r.distance <= distance)
     }
   }
   return restaurants
