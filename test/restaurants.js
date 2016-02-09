@@ -52,7 +52,9 @@ describe('getRestaurant', () => {
   })
 })
 
-describe('getRestaurants', () => {
+describe('getRestaurants', function () {
+  this.timeout(5000)
+
   it('should get all restaurants', async function (done) {
     var list = await getRestaurants({})
     expect(list).to.be.an('array')
