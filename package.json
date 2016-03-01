@@ -30,7 +30,7 @@
     "graphql": "^0.4.17",
     "html-to-text": "^1.6.0",
     "moment": "^2.11.2",
-    "pdf2json": "^1.0.1",
+    "pdf2json": "^1.0.2",
     "request-promise": "^2.0.0"
   },
   "engines": {
