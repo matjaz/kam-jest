@@ -70,9 +70,6 @@ describe('findDates', () => {
       month: 1,
       year: 2016
     }])
-
-    dates = findDates('MALICE Od 28.9,2015')
-    expect(dates).to.eql([])
   })
 })
 

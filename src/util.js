@@ -13,17 +13,8 @@ export function findDates (str) {
       year: match[3] && parseFloat(match[3]) || undefined
     })
   }
-  switch (dates.length) {
-    case 1:
-      if (!dates[0].year) {
-        dates.length = 0
-      }
-      break
-    case 2:
-      if (!dates[0].year && dates[1].year) {
-        dates[0].year = dates[1].year
-      }
-      break
+  if (dates.length === 2 && !dates[0].year && dates[1].year) {
+    dates[0].year = dates[1].year
   }
   return dates
 }
