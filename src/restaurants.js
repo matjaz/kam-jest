@@ -28,11 +28,20 @@ export function getRestaurant (restaurantId) {
       },
       async data () {
         if (Parser.prototype.parseData) {
-          var body = await this.provider().fetch()
+          let body
+          if (Provider.prototype.fetchData) {
+            body = await this.provider().fetchData()
+          } else {
+            body = await this.provider().fetch()
+          }
           return this.parser().parseData(body)
         }
         return {
-          name: m[0]
+          name: m[0],
+          location: {
+            lat: undefined,
+            lon: undefined
+          }
         }
       }
     }

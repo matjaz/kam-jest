@@ -43,9 +43,7 @@ export default class GostilneParser {
   }
 
   parseData (data) {
-    return {
-      name: data.name
-    }
+    return data
   }
 
 }

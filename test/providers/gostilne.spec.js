@@ -6,7 +6,7 @@ import GostilneProvider from '../../src/providers/gostilne'
 describe('Gostilne provider', () => {
   it('should make http request', (done) => {
     nock('http://www.gostilne.si')
-      .get('/jsonGostilne.php?action2=hash&pos=46%2C15&hash=test')
+      .get('/jsonGostilne.php?pos=46%2C15&hash=test&action2=hash')
       .reply(200, '{"ok":true}')
 
     new GostilneProvider('test').fetch().then((resp) => {

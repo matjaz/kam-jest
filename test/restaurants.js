@@ -48,7 +48,7 @@ describe('getRestaurant', () => {
     expect(restaurant.parser())
       .is.an.instanceof(GostilneParser)
     expect(provider.url)
-      .to.equal('http://www.gostilne.si/jsonGostilne.php?action2=hash&pos=46%2C15&hash=test')
+      .to.equal('http://www.gostilne.si/jsonGostilne.php?pos=46%2C15&hash=test&action2=hash')
   })
 })
 
