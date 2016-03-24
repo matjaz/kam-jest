@@ -33,7 +33,7 @@ export function findDatesISO (str) {
 }
 
 export function getPrice (line) {
-  var match = line.match(/\d+(?:[,.]\s?\d{2})?/)
+  var match = line.match(/\d+(?:[,.]\s?\d{1,2})?/)
   if (match) {
     return parseFloat(match[0].replace(',', '.').replace(/\s/, ''))
   }

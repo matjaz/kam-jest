@@ -104,6 +104,11 @@ describe('getPrice', () => {
     expect(price).to.be.equal(13.37)
   })
 
+  it('should return price with one decimal', () => {
+    var price = getPrice('text 13.3E')
+    expect(price).to.be.equal(13.3)
+  })
+
   it('should return undefined on no match', () => {
     var price = getPrice('text')
     expect(price).to.be.an('undefined')
