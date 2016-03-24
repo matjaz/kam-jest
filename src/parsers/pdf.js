@@ -5,14 +5,12 @@ export default class PdfParser {
   parse (pdfBuffer) {
     return new Promise((resolve, reject) => {
       var pdfParser = new PDFParser()
-      pdfParser.on('pdfParser_dataReady', (e) => {
-        resolve(e.data)
-        e.destroy()
+      pdfParser.on('pdfParser_dataReady', (pdfData) => {
+        resolve(pdfData.formImage)
       })
 
-      pdfParser.on('pdfParser_dataError', (e) => {
-        reject(e.data)
-        e.destroy()
+      pdfParser.on('pdfParser_dataError', (errData) => {
+        reject(errData.parserError)
       })
 
       pdfParser.parseBuffer(pdfBuffer)
