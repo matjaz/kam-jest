@@ -37,7 +37,7 @@
     "node": "4.2.1"
   },
   "devDependencies": {
-    "babel-eslint": "^5.0.0",
+    "babel-eslint": "^6.0.0",
     "babel-polyfill": "^6.6.1",
     "chai": "^3.5.0",
     "isparta": "^4.0.0",
