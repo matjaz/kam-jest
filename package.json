@@ -25,7 +25,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "cheerio": "^0.22.0",
     "express": "^4.13.4",
-    "express-graphql": "^0.5.1",
+    "express-graphql": "^0.6.1",
     "graphql": "^0.7.1",
     "html-to-text": "^2.1.0",
     "moment": "^2.13.0",
