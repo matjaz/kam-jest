@@ -27,7 +27,7 @@
     "express": "^4.13.4",
     "express-graphql": "^0.5.1",
     "graphql": "^0.7.1",
-    "html-to-text": "^2.1.0",
+    "html-to-text": "^3.0.0",
     "moment": "^2.13.0",
     "pdf2json": "^1.1.5",
     "request-promise": "^4.0.0"
