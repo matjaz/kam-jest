@@ -40,7 +40,7 @@ export default class FoglezParser {
             allergens = allergens[1].split(',').map((x) => x.trim())
           }
           dayOffers.push({
-            text: line.replace(/^\-\s*/, '').replace(/\s*\(.*\)*$/, ''),
+            text: line.replace(/^-\s*/, '').replace(/\s*\(.*\)*$/, ''),
             price: DEFAULT_PRICE,
             type: type,
             allergens: allergens || [],

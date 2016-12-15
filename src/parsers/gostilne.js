@@ -33,7 +33,7 @@ export default class GostilneParser {
           return
         }
         dayOffers.push({
-          text: text.replace(/\s*\-?\s*\d*[,.]\d*.$/, '').trim(),
+          text: text.replace(/\s*-?\s*\d*[,.]\d*.$/, '').trim(),
           price: getPrice(text),
           type: type
         })

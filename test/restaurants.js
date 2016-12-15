@@ -55,26 +55,23 @@ describe('getRestaurant', () => {
 describe('getRestaurants', function () {
   this.timeout(5000)
 
-  it('should get all restaurants', async function (done) {
+  it('should get all restaurants', async function () {
     var list = await getRestaurants({})
     expect(list).to.be.an('array')
     expect(list.length).to.be.above(5)
-    done()
   })
 
-  it('should return only one restaurant', async function (done) {
+  it('should return only one restaurant', async function () {
     var list = await getRestaurants({id: 'selih'})
     expect(list.length).to.equal(1)
-    done()
   })
 
-  it('should exclude restaurant', async function (done) {
+  it('should exclude restaurant', async function () {
     var list = await getRestaurants({id: '!selih'})
     expect(list.map((x) => x.id)).not.to.include('selih')
-    done()
   })
 
-  it('should calculate distance when location is provided', async function (done) {
+  it('should calculate distance when location is provided', async function () {
     var list = await getRestaurants({
       id: 'selih',
       loc: {
@@ -86,10 +83,9 @@ describe('getRestaurants', function () {
     expect(list[0])
       .to.have.property('distance')
       .that.is.above(1)
-    done()
   })
 
-  it('should filter by lesser distance', async function (done) {
+  it('should filter by lesser distance', async function () {
     var list = await getRestaurants({
       loc: {
         lat: 46.522425,
@@ -103,26 +99,23 @@ describe('getRestaurants', function () {
         .to.have.property('distance')
         .that.is.below(2)
     })
-    done()
   })
 
-  it('should throw error for invalid id', async function (done) {
+  it('should throw error for invalid id', async function () {
     try {
       await getRestaurants({id: '404'})
     } catch (e) {
       expect(e.message).to.equal('Restaurant not found: 404')
-      done()
     }
   })
 
-  it('should throw error when filtering by distance and loc is missing', async function (done) {
+  it('should throw error when filtering by distance and loc is missing', async function () {
     try {
       await getRestaurants({
         distance: 0
       })
     } catch (e) {
       expect(e.message).to.equal('loc argument is mandatory, when using distance')
-      done()
     }
   })
 })

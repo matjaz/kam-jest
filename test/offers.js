@@ -86,45 +86,40 @@ describe('getDailyOffers', () => {
     restaurants.getRestaurant.restore()
   })
 
-  it('should get simple', async function (done) {
+  it('should get simple', async function () {
     var res = await getDailyOffers('test', {
       date: '0000-00-00',
       type: 'KOSILO'
     })
     expect(parse.calledWithExactly('content')).to.equal(true)
     expect(res).to.be.an('array')
-    done()
   })
 
-  it('should fix January', async function (done) {
+  it('should fix January', async function () {
     var year = new Date().getFullYear()
     parseData[`${year - 1}-01-01`] = parseData['0000-01-01']
     delete parseData['0000-01-01']
     var res = await getDailyOffers('test', {})
     expect(res.map((x) => x.date)).to.eql(['0000-00-00', `${year}-01-01`])
-    done()
   })
 
-  it('should not fix January', async function (done) {
+  it('should not fix January', async function () {
     var res = await getDailyOffers('test', {})
     expect(res.map((x) => x.date)).to.eql(['0000-00-00', '0000-01-01'])
-    done()
   })
 
-  it('should not check January issue', async function (done) {
+  it('should not check January issue', async function () {
     parseData['0000-00-01'] = parseData['0000-01-01']
     delete parseData['0000-01-01']
     var res = await getDailyOffers('test', {})
     expect(res.map((x) => x.date)).to.eql(['0000-00-00', '0000-00-01'])
-    done()
   })
 
-  it('should exclude type', async function (done) {
+  it('should exclude type', async function () {
     var res = await getDailyOffers('test', {
       type: '!KOSILO'
     })
     expect(res.reduce((sum, dailyOffer) => sum + dailyOffer.offers.length, 0))
       .to.equal(1)
-    done()
   })
 })

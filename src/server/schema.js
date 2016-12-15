@@ -104,9 +104,9 @@ const Query = new GraphQLObjectType({
         loc: {type: GeoPointInput},
         distance: {type: GraphQLFloat}
       },
-      resolve (source, args, ast) {
+      resolve (source, args, req, ast) {
         if (ast && !args.loc) {
-          var fields = ast.fieldASTs[0].selectionSet.selections.map((selection) => selection.name.value)
+          var fields = ast.fieldNodes[0].selectionSet.selections.map((selection) => selection.name.value)
           if (fields.includes('distance')) {
             throw new Error('distance field requires loc argument')
           }
