@@ -7,10 +7,6 @@ export default class HttpProvider {
   }
 
   fetch () {
-    return this.fetchUrl(this.url)
-  }
-
-  fetchUrl (url) {
-    return rp(url)
+    return rp(this.url)
   }
 }
