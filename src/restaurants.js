@@ -49,7 +49,6 @@ export function getRestaurant (restaurantId) {
   try {
     return require(`./restaurants/${restaurantId}`)
   } catch (e) {
-    console.error(e)
     throw new Error(`Restaurant not found: ${restaurantId}`)
   }
 }
