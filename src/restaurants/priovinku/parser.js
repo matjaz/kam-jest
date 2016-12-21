@@ -27,19 +27,19 @@ export default class PriOvinkuParser {
       dayOffers = dayData.offers
       lines.some((line) => {
         line = line.trim()
-        if (line.startsWith('FIT PONUDBA')) {
+        if (line.includes(' PONUDBA')) {
           // skip
           return
         }
-        if (line.includes('DOSTAVA')) {
+        if (line.includes('DOSTAVA') || line.includes('Products')) {
           // end
           return true
         }
         line.split(/€/g).forEach(line => {
-          let price = getPrice(line)
-          if (!price) {
+          if (!line) {
             return
           }
+          let price = getPrice(line)
           let text
           let allergens
           let lineMatch = line.match(/(.*?)\s*\((.*?)\)\s*\d*,?\d*.?$/)
