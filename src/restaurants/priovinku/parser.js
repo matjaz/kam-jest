@@ -1,4 +1,4 @@
-import {findDatesISO, toISODate, getLines, getPrice} from '../../util'
+import {getLines, getPrice} from '../../util'
 import {OfferTypes} from '../../offers'
 
 export default class PriOvinkuParser {
@@ -13,21 +13,19 @@ export default class PriOvinkuParser {
     var dayOffers
     var type = OfferTypes.MALICA
     if (this.isCandidate(post)) {
+      let start
       var lines = getLines(post.message)
-      let dates = findDatesISO(lines.shift())
-      var date = dates[0]
-      if (!date) {
-        date = post.created_time.slice(0, 10)
-        if (date !== toISODate()) { // today?
-          return
-        }
-      }
+      var date = post.created_time.slice(0, 10)
       week = week || {}
       let dayData = week[date] || (week[date] = {offers: []})
       dayOffers = dayData.offers
       lines.some((line) => {
         line = line.trim()
-        if (line.includes(' PONUDBA')) {
+        if (line.includes(' JUHA')) {
+          start = true
+          return
+        }
+        if (!start || line.includes(' PONUDBA')) {
           // skip
           return
         }
