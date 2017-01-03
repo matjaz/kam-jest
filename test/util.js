@@ -77,6 +77,9 @@ describe('findDatesISO', () => {
   it('should find and return ISO date', () => {
     var dates = findDatesISO('KOSILA 2.11.2015\n')
     expect(dates).to.eql(['2015-11-02'])
+
+    dates = findDatesISO('pokliči 041 123 456!')
+    expect(dates).to.eql([])
   })
 })
 

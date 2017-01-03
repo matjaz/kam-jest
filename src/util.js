@@ -7,11 +7,14 @@ export function findDates (str) {
   var dates = []
   while ((match = re.exec(str))) {
     // moment() compatible (zero based month)
-    dates.push({
+    let d = {
       day: parseFloat(match[1]),
       month: parseFloat(match[2]) - 1,
       year: match[3] && parseFloat(match[3]) || undefined
-    })
+    }
+    if (moment(d).isValid()) {
+      dates.push(d)
+    }
   }
   if (dates.length === 2 && !dates[0].year && dates[1].year) {
     dates[0].year = dates[1].year
