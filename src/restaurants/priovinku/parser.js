@@ -1,11 +1,11 @@
-import {getLines, getPrice} from '../../util'
+import {findDatesISO, toISODate, getLines, getPrice} from '../../util'
 import {OfferTypes} from '../../offers'
 
 export default class PriOvinkuParser {
 
   isCandidate (post) {
     var message = post.message
-    return message && message.includes(' MALIC')
+    return message && message.includes(' JUHA')
   }
 
   parse (post) {
@@ -15,7 +15,13 @@ export default class PriOvinkuParser {
     if (this.isCandidate(post)) {
       let start
       var lines = getLines(post.message)
-      var date = post.created_time.slice(0, 10)
+      var date = findDatesISO(lines.shift())[0]
+      if (!date) {
+        date = post.created_time.slice(0, 10)
+        if (date !== toISODate()) { // today?
+          return
+        }
+      }
       week = week || {}
       let dayData = week[date] || (week[date] = {offers: []})
       dayOffers = dayData.offers
