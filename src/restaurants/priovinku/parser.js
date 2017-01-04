@@ -15,7 +15,7 @@ export default class PriOvinkuParser {
     if (this.isCandidate(post)) {
       let start
       var lines = getLines(post.message)
-      var date = findDatesISO(lines.shift())[0]
+      var date = findDatesISO(lines[0])[0]
       if (!date) {
         date = post.created_time.slice(0, 10)
         if (date !== toISODate()) { // today?
