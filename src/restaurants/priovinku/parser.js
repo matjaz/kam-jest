@@ -46,12 +46,12 @@ export default class PriOvinkuParser {
           let price = getPrice(line)
           let text
           let allergens
-          let lineMatch = line.match(/(.*?)\s*\((.*?)\)\s*\d*,?\d*.?$/)
+          let lineMatch = line.match(/(?:\s*\*?)(.*?)\s*\((.*?)\)\s*\d*,?\d*.?$/)
           if (lineMatch) {
             allergens = lineMatch[2].split(',').map((x) => x.trim())
             text = lineMatch[1]
           } else {
-            text = line.trim().replace(/\s+\d+(,\d+)?.?/, '')
+            text = line.trim().replace(/\s+\d+(,\d+)?.?/, '').replace(/^\s*\*?/, '')
             allergens = []
           }
           dayOffers.push({
