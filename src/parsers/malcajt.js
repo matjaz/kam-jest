@@ -5,13 +5,14 @@ export default class MalcajtParser {
 
   parse (data) {
     var offers
-    var Lunch = data.Lunch
+    const Lunch = data.Lunch
     if (Lunch) {
-      let type = OfferTypes.MALICA
+      const type = OfferTypes.MALICA
       offers = {}
       Lunch.forEach(l => {
-        var dayOffers = []
-        getLines(l.DayLunches.replace(/<br\s*?\/?>/g, '')).forEach(text => {
+        const dayOffers = []
+        const lines = typeof l.DayLunches === 'string' ? getLines(l.DayLunches.replace(/<br\s*?\/?>/g, '')) : l.DayLunches
+        lines.forEach(text => {
           text = text.trim()
           if (text) {
             dayOffers.push({
