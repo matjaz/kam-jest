@@ -44,7 +44,7 @@
     "mocha": "^3.2.0",
     "nock": "^9.0.1",
     "sinon": "^1.17.3",
-    "standard": "^8.0.0"
+    "standard": "^9.0.0"
   },
   "standard": {
     "parser": "babel-eslint",
