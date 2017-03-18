@@ -19,7 +19,8 @@ describe('Gostilne provider', () => {
 
   it('should throw when id is not provided', () => {
     var fn = () => {
-      new GostilneProvider().url
+      var provider = new GostilneProvider()
+      provider.url = null
     }
     expect(fn).to.throw('Missing id')
   })

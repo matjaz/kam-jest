@@ -4,7 +4,6 @@ import {DAYS, OfferTypes} from '../../offers'
 const DEFAULT_PRICE = 4.5
 
 export default class FoglezParser {
-
   isCandidate (post) {
     var message = post.message
     return message && message.indexOf(' MALIC ') !== -1

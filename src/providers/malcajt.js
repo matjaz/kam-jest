@@ -1,7 +1,6 @@
 import HttpJSONProvider from './http-json'
 
 export default class MalcajtProvider extends HttpJSONProvider {
-
   constructor (regionID, cityID, id) {
     if (!id) {
       throw new Error('Missing id')
@@ -26,5 +25,4 @@ export default class MalcajtProvider extends HttpJSONProvider {
       return resp.Restaurants.find(r => r.RestaurantID === this.id)
     }
   }
-
 }

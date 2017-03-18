@@ -6,7 +6,6 @@ import cheerio from 'cheerio'
 const DEFAULT_PRICE = 5
 
 export default class DePonchoParser {
-
   parse (html) {
     var offers
     var dayOffers
@@ -50,5 +49,4 @@ export default class DePonchoParser {
     })
     return offers
   }
-
 }

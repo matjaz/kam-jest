@@ -4,7 +4,6 @@ import {getLines, getPrice, findDatesISO} from '../../util'
 import {ALL_DAYS, OfferTypes} from '../../offers'
 
 export default class DaNoiParser {
-
   parse (pageSource) {
     var offers
     var dayOffers

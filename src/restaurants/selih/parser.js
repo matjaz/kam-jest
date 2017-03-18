@@ -4,7 +4,6 @@ import {DAYS, OfferTypes} from '../../offers'
 const types = ['MALICE', 'KOSILA']
 
 export default class SelihParser {
-
   isCandidate (post) {
     var message = post.message
     return message && message.indexOf('MALICE') !== -1

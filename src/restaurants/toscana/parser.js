@@ -2,7 +2,6 @@ import {findDatesISO, getPrice, getLines} from '../../util'
 import {DAYS, OfferTypes} from '../../offers'
 
 export default class ToscanaParser {
-
   isCandidate (post) {
     var message = post.message
     return message && message.indexOf('KOSILA') !== -1
@@ -37,5 +36,4 @@ export default class ToscanaParser {
       return week
     }
   }
-
 }

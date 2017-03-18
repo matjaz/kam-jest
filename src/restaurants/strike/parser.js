@@ -6,7 +6,6 @@ import {DAYS, OfferTypes} from '../../offers'
 const DEFAULT_PRICE = 4.2
 
 export default class StrikeParser {
-
   isCandidate (text) {
     return text && text.indexOf(' MALIC ') !== -1
   }
@@ -28,7 +27,7 @@ export default class StrikeParser {
       var dates = findDatesISO(lines.shift())
       var startDate = dates.length ? dates[0] : '-'
       var priceResult = text.match(/=\s*(\d+,\d{2})€/)
-      var price = priceResult && getPrice(priceResult[0]) || DEFAULT_PRICE
+      var price = (priceResult && getPrice(priceResult[0])) || DEFAULT_PRICE
       lines.some((line) => {
         var daysIndex
         line = line.trim()

@@ -73,7 +73,7 @@ describe('getDailyOffers', () => {
     data = sinon.stub().returns({
       name: 'test'
     })
-    sinon.stub(restaurants, 'getRestaurant', () => {
+    sinon.stub(restaurants, 'getRestaurant').callsFake(() => {
       return {
         provider,
         parser,

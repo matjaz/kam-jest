@@ -3,7 +3,6 @@ import {findDatesISO, getPrice} from '../../util'
 import {ALL_DAYS, OfferTypes} from '../../offers'
 
 export default class SparParser extends PdfParser {
-
   async parse (pdfBuffer) {
     var pdf = await super.parse(pdfBuffer)
     var lines = this.getLines(pdf)
@@ -66,5 +65,4 @@ export default class SparParser extends PdfParser {
     })
     return offers
   }
-
 }

@@ -2,7 +2,6 @@ import {findDatesISO, toISODate, getLines, getPrice} from '../../util'
 import {OfferTypes} from '../../offers'
 
 export default class PriOvinkuParser {
-
   isCandidate (post) {
     var message = post.message
     return message && message.includes(' JUHA')

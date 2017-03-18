@@ -4,7 +4,6 @@ import {findDatesISO, getPrice} from '../util'
 import {OfferTypes} from '../offers'
 
 export default class GostilneParser {
-
   parse (data) {
     if (!data || data.out !== 'OK') {
       return
@@ -45,5 +44,4 @@ export default class GostilneParser {
   parseData (data) {
     return data
   }
-
 }

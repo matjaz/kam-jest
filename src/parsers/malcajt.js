@@ -2,7 +2,6 @@ import {getLines} from '../util'
 import {OfferTypes} from '../offers'
 
 export default class MalcajtParser {
-
   parse (data) {
     var offers
     const Lunch = data.Lunch
@@ -48,5 +47,4 @@ export default class MalcajtParser {
       }
     }
   }
-
 }

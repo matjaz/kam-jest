@@ -67,7 +67,7 @@ export async function getDailyOffers (restaurantId, args) {
     filterFn = type.not ? (offer) => offer.type !== type.value : (offer) => offer.type === type.value
   }
   return dates.map((date) => {
-    var offers = allOffers[date] && allOffers[date].offers || []
+    var offers = (allOffers[date] && allOffers[date].offers) || []
     if (filterFn && offers.length) {
       offers = offers.filter(filterFn)
     }

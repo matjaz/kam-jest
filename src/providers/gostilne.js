@@ -1,7 +1,6 @@
 import HttpJSONProvider from './http-json'
 
 export default class GostilneProvider extends HttpJSONProvider {
-
   constructor (id) {
     if (!id) {
       throw new Error('Missing id')

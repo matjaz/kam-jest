@@ -1,7 +1,6 @@
 import PDFParser from 'pdf2json'
 
 export default class PdfParser {
-
   parse (pdfBuffer) {
     return new Promise((resolve, reject) => {
       var pdfParser = new PDFParser()

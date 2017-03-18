@@ -10,7 +10,7 @@ export function findDates (str) {
     let d = {
       day: parseFloat(match[1]),
       month: parseFloat(match[2]) - 1,
-      year: match[3] && parseFloat(match[3]) || undefined
+      year: (match[3] && parseFloat(match[3])) || undefined
     }
     if (moment(d).isValid()) {
       dates.push(d)
@@ -72,7 +72,7 @@ export function requiredInPair (pair) {
     throw new Error('Pair should contain exactly two items')
   }
   const [a, b] = [pair[keys[0]], pair[keys[1]]]
-  if (a == null && b != null || a != null && b == null) {
+  if ((a == null && b != null) || (a != null && b == null)) {
     throw new Error(`required pair ${keys}`)
   }
 }
