@@ -1,5 +1,5 @@
-import {getLines} from '../util'
-import {OfferTypes} from '../offers'
+import { getLines } from '../util'
+import { OfferTypes } from '../offers'
 
 export default class MalcajtParser {
   parse (data) {

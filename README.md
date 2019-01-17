@@ -1,4 +1,7 @@
 # kam-jest
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/matjaz/kam-jest.svg)](https://greenkeeper.io/)
+
 [![Build status][travis-image]][travis-url] [![Code Climate][codeclimate-image]][codeclimate-url] [![Codeship Status for matjaz/kam-jest][codeship-image]][codeship-url] [![Coverage Status][coverage-image]][coverage-url] [![js-standard-style][standard-image]][standard-url] [![Dependencies][david-image]][david-url] [![devDependencies][david-dev-image]][david-dev-url]
 
 Restaurant daily meal offers GraphQL API

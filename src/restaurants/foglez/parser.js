@@ -1,5 +1,5 @@
-import {findDatesISO, getLines, toISODate, addToDate} from '../../util'
-import {DAYS, OfferTypes} from '../../offers'
+import { findDatesISO, getLines, toISODate, addToDate } from '../../util'
+import { DAYS, OfferTypes } from '../../offers'
 
 const DEFAULT_PRICE = 4.5
 
@@ -31,7 +31,7 @@ export default class FoglezParser {
         if ((daysIndex = DAYS.indexOf(line.toUpperCase())) !== -1) {
           let date = startDate === '-' ? '-' : addToDate(startDate, daysIndex)
           week = week || {}
-          let dayData = week[date] || (week[date] = {offers: []})
+          let dayData = week[date] || (week[date] = { offers: [] })
           dayOffers = dayData.offers
         } else if (line && dayOffers) {
           let allergens = line.match(/\((.*)\)/)

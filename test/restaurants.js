@@ -1,6 +1,6 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 
-import {getRestaurant, getRestaurants} from '../src/restaurants'
+import { getRestaurant, getRestaurants } from '../src/restaurants'
 import FacebookGraphProvider from '../src/providers/facebookGraph'
 import GostilneProvider from '../src/providers/gostilne'
 import GostilneParser from '../src/parsers/gostilne'
@@ -62,12 +62,12 @@ describe('getRestaurants', function () {
   })
 
   it('should return only one restaurant', async function () {
-    var list = await getRestaurants({id: 'selih'})
+    var list = await getRestaurants({ id: 'selih' })
     expect(list.length).to.equal(1)
   })
 
   it('should exclude restaurant', async function () {
-    var list = await getRestaurants({id: '!selih'})
+    var list = await getRestaurants({ id: '!selih' })
     expect(list.map((x) => x.id)).not.to.include('selih')
   })
 
@@ -103,7 +103,7 @@ describe('getRestaurants', function () {
 
   it('should throw error for invalid id', async function () {
     try {
-      await getRestaurants({id: '404'})
+      await getRestaurants({ id: '404' })
     } catch (e) {
       expect(e.message).to.equal('Restaurant not found: 404')
     }

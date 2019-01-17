@@ -1,7 +1,7 @@
 import htmlToText from 'html-to-text'
 
-import {findDatesISO, getLines, getPrice, addToDate} from '../../util'
-import {DAYS, OfferTypes} from '../../offers'
+import { findDatesISO, getLines, getPrice, addToDate } from '../../util'
+import { DAYS, OfferTypes } from '../../offers'
 
 const DEFAULT_PRICE = 4.2
 
@@ -37,7 +37,7 @@ export default class StrikeParser {
         if ((daysIndex = DAYS.indexOf(line.toUpperCase())) !== -1) {
           let date = startDate === '-' ? '-' : addToDate(startDate, daysIndex)
           week = week || {}
-          let dayData = week[date] || (week[date] = {offers: []})
+          let dayData = week[date] || (week[date] = { offers: [] })
           dayOffers = dayData.offers
         } else if (line && dayOffers && line.match(/^\d/)) {
           let allergens = line.match(/\((.*)\)/)

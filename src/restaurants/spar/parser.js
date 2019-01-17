@@ -1,6 +1,6 @@
 import PdfParser from '../../parsers/pdf'
-import {findDatesISO, getPrice} from '../../util'
-import {ALL_DAYS, OfferTypes} from '../../offers'
+import { findDatesISO, getPrice } from '../../util'
+import { ALL_DAYS, OfferTypes } from '../../offers'
 
 export default class SparParser extends PdfParser {
   async parse (pdfBuffer) {
@@ -44,7 +44,7 @@ export default class SparParser extends PdfParser {
             return true
           }
           dayOffers = []
-          offers[date] = {offers: dayOffers}
+          offers[date] = { offers: dayOffers }
         } else {
           dayOffers = null
         }

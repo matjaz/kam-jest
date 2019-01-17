@@ -1,8 +1,8 @@
-import {readdirSync} from 'fs'
-import {getValue, distance as calcDistance} from './util'
+import { readdirSync } from 'fs'
+import { getValue, distance as calcDistance } from './util'
 
 const RESTAURANTS = readdirSync(`${__dirname}/restaurants`)
-                      .map((x) => x.replace(/\.js$/, ''))
+  .map((x) => x.replace(/\.js$/, ''))
 
 export function getRestaurant (restaurantId) {
   // provider|parser
@@ -54,7 +54,7 @@ export function getRestaurant (restaurantId) {
 }
 
 export async function getRestaurants (args) {
-  var {id, loc, distance} = args
+  var { id, loc, distance } = args
   var ids
   if (!loc && 'distance' in args) {
     throw new Error('loc argument is mandatory, when using distance')
@@ -78,7 +78,7 @@ export async function getRestaurants (args) {
   }))
   if (loc) {
     restaurants.forEach((r) => {
-      var {location} = r
+      var { location } = r
       r.distance = calcDistance(loc.lat, loc.lon, location.lat, location.lon)
     })
     if (distance != null) {

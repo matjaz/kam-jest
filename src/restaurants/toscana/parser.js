@@ -1,5 +1,5 @@
-import {findDatesISO, getPrice, getLines} from '../../util'
-import {DAYS, OfferTypes} from '../../offers'
+import { findDatesISO, getPrice, getLines } from '../../util'
+import { DAYS, OfferTypes } from '../../offers'
 
 export default class ToscanaParser {
   isCandidate (post) {
@@ -22,7 +22,7 @@ export default class ToscanaParser {
           if (!week) {
             week = {}
           }
-          let dayData = week[date] || (week[date] = {offers: []})
+          let dayData = week[date] || (week[date] = { offers: [] })
           dayOffers = dayData.offers
         } else if (line && dayOffers) {
           dayOffers.push({

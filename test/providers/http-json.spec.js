@@ -1,5 +1,5 @@
 import nock from 'nock'
-import {expect} from 'chai'
+import { expect } from 'chai'
 
 import HttpJSONProvider from '../../src/providers/http-json'
 

@@ -1,8 +1,8 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 import sinon from 'sinon'
 
 import * as restaurants from '../src/restaurants'
-import {DAYS, ALL_DAYS, OfferTypes, getDailyOffers} from '../src/offers'
+import { DAYS, ALL_DAYS, OfferTypes, getDailyOffers } from '../src/offers'
 
 describe('DAYS', () => {
   it('should contain 5 workdays', () => {

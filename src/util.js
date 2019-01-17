@@ -58,7 +58,7 @@ export function getValue (value, mapper) {
   }
 }
 
-const PI180 = 0.017453292519943295    // Math.PI / 180
+const PI180 = 0.017453292519943295 // Math.PI / 180
 export function distance (lat1, lon1, lat2, lon2) {
   var a = 0.5 - Math.cos((lat2 - lat1) * PI180) / 2 +
           Math.cos(lat1 * PI180) * Math.cos(lat2 * PI180) *
