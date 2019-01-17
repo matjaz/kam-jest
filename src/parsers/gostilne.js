@@ -1,7 +1,7 @@
 import cheerio from 'cheerio'
 
-import {findDatesISO, getPrice} from '../util'
-import {OfferTypes} from '../offers'
+import { findDatesISO, getPrice } from '../util'
+import { OfferTypes } from '../offers'
 
 export default class GostilneParser {
   parse (data) {

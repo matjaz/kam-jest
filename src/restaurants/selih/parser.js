@@ -1,5 +1,5 @@
-import {findDatesISO, getPrice, getLines, toISODate, addToDate} from '../../util'
-import {DAYS, OfferTypes} from '../../offers'
+import { findDatesISO, getPrice, getLines, toISODate, addToDate } from '../../util'
+import { DAYS, OfferTypes } from '../../offers'
 
 const types = ['MALICE', 'KOSILA']
 
@@ -30,7 +30,7 @@ export default class SelihParser {
         } else if ((daysIndex = DAYS.indexOf(line.toUpperCase())) !== -1) {
           let date = startDate === '-' ? '-' : addToDate(startDate, daysIndex)
           week = week || {}
-          let dayData = week[date] || (week[date] = {offers: []})
+          let dayData = week[date] || (week[date] = { offers: [] })
           dayOffers = dayData.offers
         } else if (line && dayOffers) {
           dayOffers.push({

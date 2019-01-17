@@ -1,5 +1,5 @@
-import {findDatesISO} from '../../util'
-import {OfferTypes} from '../../offers'
+import { findDatesISO } from '../../util'
+import { OfferTypes } from '../../offers'
 
 import cheerio from 'cheerio'
 

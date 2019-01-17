@@ -1,5 +1,5 @@
-import {findDatesISO, toISODate, getLines, getPrice} from '../../util'
-import {OfferTypes} from '../../offers'
+import { findDatesISO, toISODate, getLines, getPrice } from '../../util'
+import { OfferTypes } from '../../offers'
 
 export default class PriOvinkuParser {
   isCandidate (post) {
@@ -22,7 +22,7 @@ export default class PriOvinkuParser {
         }
       }
       week = week || {}
-      let dayData = week[date] || (week[date] = {offers: []})
+      let dayData = week[date] || (week[date] = { offers: [] })
       dayOffers = dayData.offers
       lines.some((line) => {
         line = line.trim()

@@ -1,7 +1,7 @@
 import htmlToText from 'html-to-text'
 
-import {getLines, getPrice, findDatesISO} from '../../util'
-import {ALL_DAYS, OfferTypes} from '../../offers'
+import { getLines, getPrice, findDatesISO } from '../../util'
+import { ALL_DAYS, OfferTypes } from '../../offers'
 
 export default class DaNoiParser {
   parse (pageSource) {
@@ -57,7 +57,7 @@ export default class DaNoiParser {
             return true
           }
           dayOffers = []
-          offers[date] = {offers: dayOffers}
+          offers[date] = { offers: dayOffers }
         }
       } else if (dayOffers && line.match(/^\d/)) {
         addOffer()

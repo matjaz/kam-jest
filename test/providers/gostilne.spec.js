@@ -1,5 +1,5 @@
 import nock from 'nock'
-import {expect} from 'chai'
+import { expect } from 'chai'
 
 import GostilneProvider from '../../src/providers/gostilne'
 

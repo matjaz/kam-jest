@@ -1,6 +1,6 @@
-import {expect} from 'chai'
+import { expect } from 'chai'
 
-import {findDates, findDatesISO, getPrice, getLines, toISODate, addToDate, getValue, distance, requiredInPair} from '../src/util'
+import { findDates, findDatesISO, getPrice, getLines, toISODate, addToDate, getValue, distance, requiredInPair } from '../src/util'
 
 describe('findDates', () => {
   it('should return empty array on empty string', () => {

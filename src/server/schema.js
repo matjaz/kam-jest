@@ -10,24 +10,24 @@ import {
   GraphQLNonNull
 } from 'graphql'
 
-import {getRestaurants} from '../restaurants'
-import {getDailyOffers, OfferTypes} from '../offers'
+import { getRestaurants } from '../restaurants'
+import { getDailyOffers, OfferTypes } from '../offers'
 
 const GeoPointInput = new GraphQLInputObjectType({
   name: 'GeoPointInput',
   fields: {
-    lat: {type: new GraphQLNonNull(GraphQLFloat)},
-    lon: {type: new GraphQLNonNull(GraphQLFloat)},
-    alt: {type: GraphQLFloat, defaultValue: 0}
+    lat: { type: new GraphQLNonNull(GraphQLFloat) },
+    lon: { type: new GraphQLNonNull(GraphQLFloat) },
+    alt: { type: GraphQLFloat, defaultValue: 0 }
   }
 })
 
 const GeoPoint = new GraphQLObjectType({
   name: 'GeoPoint',
   fields: {
-    lat: {type: new GraphQLNonNull(GraphQLFloat)},
-    lon: {type: new GraphQLNonNull(GraphQLFloat)},
-    alt: {type: GraphQLFloat, defaultValue: 0}
+    lat: { type: new GraphQLNonNull(GraphQLFloat) },
+    lon: { type: new GraphQLNonNull(GraphQLFloat) },
+    alt: { type: GraphQLFloat, defaultValue: 0 }
   }
 })
 
@@ -50,14 +50,14 @@ const Restaurant = new GraphQLObjectType({
   name: 'Restaurant',
   description: 'Restaurant',
   fields: () => ({
-    id: {type: new GraphQLNonNull(GraphQLID)},
-    name: {type: new GraphQLNonNull(GraphQLString)},
-    location: {type: GeoPoint},
-    distance: {type: GraphQLFloat},
+    id: { type: new GraphQLNonNull(GraphQLID) },
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    location: { type: GeoPoint },
+    distance: { type: GraphQLFloat },
     dailyOffers: {
       type: new GraphQLList(RestaurantDailyOffer),
       args: {
-        date: {type: GraphQLString},
+        date: { type: GraphQLString },
         type: {
           description: 'Include only offers of this type. Negate by prefixing with !.',
           type: GraphQLString
@@ -74,10 +74,10 @@ const RestaurantOffer = new GraphQLObjectType({
   name: 'RestaurantOffer',
   description: 'Restaurant Offer',
   fields: () => ({
-    text: {type: new GraphQLNonNull(GraphQLString)},
-    type: {type: new GraphQLNonNull(OfferType)},
-    price: {type: GraphQLFloat},
-    allergens: {type: new GraphQLList(GraphQLString)}
+    text: { type: new GraphQLNonNull(GraphQLString) },
+    type: { type: new GraphQLNonNull(OfferType) },
+    price: { type: GraphQLFloat },
+    allergens: { type: new GraphQLList(GraphQLString) }
   })
 })
 
@@ -85,9 +85,9 @@ const RestaurantDailyOffer = new GraphQLObjectType({
   name: 'RestaurantDailyOffer',
   description: 'Restaurant Daily Offer',
   fields: {
-    date: {type: GraphQLString},
-    offers: {type: new GraphQLList(RestaurantOffer)},
-    special: {type: new GraphQLList(RestaurantOffer)}
+    date: { type: GraphQLString },
+    offers: { type: new GraphQLList(RestaurantOffer) },
+    special: { type: new GraphQLList(RestaurantOffer) }
   }
 })
 
@@ -101,8 +101,8 @@ const Query = new GraphQLObjectType({
           description: 'Include only restaurant with specified id. Negate by prefixing with !.',
           type: GraphQLID
         },
-        loc: {type: GeoPointInput},
-        distance: {type: GraphQLFloat}
+        loc: { type: GeoPointInput },
+        distance: { type: GraphQLFloat }
       },
       resolve (source, args, req, ast) {
         if (ast && !args.loc) {

@@ -7,7 +7,7 @@ export default class SparProvider {
     var base = await rp(URL)
     var match = base.match(/href="(.*?pdf)"/)
     if (match) {
-      return await rp({
+      return rp({
         uri: `https://www.spar.si${match[1]}`,
         encoding: null
       })

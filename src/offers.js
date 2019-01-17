@@ -1,5 +1,5 @@
-import {getValue} from './util'
-import {getRestaurant} from './restaurants'
+import { getValue } from './util'
+import { getRestaurant } from './restaurants'
 
 export const DAYS = ['PONEDELJEK', 'TOREK', 'SREDA', 'ČETRTEK', 'PETEK']
 export const ALL_DAYS = DAYS.concat('SOBOTA', 'NEDELJA')
@@ -36,7 +36,7 @@ export const OfferTypes = {
 export async function getDailyOffers (restaurantId, args) {
   var dates
   var filterFn
-  var {date} = args
+  var { date } = args
   var type = getValue(args.type, (x) => OfferTypes.from(x))
   var allOffers = await findOffers(restaurantId)
   if (!allOffers) {
