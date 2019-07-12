@@ -35,9 +35,9 @@ export default class StrikeParser {
           return true
         }
         if ((daysIndex = DAYS.indexOf(line.toUpperCase())) !== -1) {
-          let date = startDate === '-' ? '-' : addToDate(startDate, daysIndex)
+          const date = startDate === '-' ? '-' : addToDate(startDate, daysIndex)
           week = week || {}
-          let dayData = week[date] || (week[date] = { offers: [] })
+          const dayData = week[date] || (week[date] = { offers: [] })
           dayOffers = dayData.offers
         } else if (line && dayOffers && line.match(/^\d/)) {
           let allergens = line.match(/\((.*)\)/)

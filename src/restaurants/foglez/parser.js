@@ -19,7 +19,7 @@ export default class FoglezParser {
       if (lines[0].startsWith(DAYS[0])) {
         startDate = toISODate(post.created_time)
       } else {
-        let dates = findDatesISO(lines.shift())
+        const dates = findDatesISO(lines.shift())
         startDate = dates.length ? dates[0] : '-'
       }
       lines.some((line) => {
@@ -29,9 +29,9 @@ export default class FoglezParser {
           return true
         }
         if ((daysIndex = DAYS.indexOf(line.toUpperCase())) !== -1) {
-          let date = startDate === '-' ? '-' : addToDate(startDate, daysIndex)
+          const date = startDate === '-' ? '-' : addToDate(startDate, daysIndex)
           week = week || {}
-          let dayData = week[date] || (week[date] = { offers: [] })
+          const dayData = week[date] || (week[date] = { offers: [] })
           dayOffers = dayData.offers
         } else if (line && dayOffers) {
           let allergens = line.match(/\((.*)\)/)

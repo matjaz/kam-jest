@@ -16,7 +16,7 @@ export default class GostilneProvider extends HttpJSONProvider {
     var name = (await this.fetch()).name
     var additionalData = await this.fetchUrl(this.dataUrl)
     if (additionalData && typeof additionalData.latlng === 'string') {
-      let parts = additionalData.latlng.split(/,\s*/).map(parseFloat)
+      const parts = additionalData.latlng.split(/,\s*/).map(parseFloat)
       if (parts.length === 2) {
         lat = parts[0]
         lon = parts[1]

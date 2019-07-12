@@ -35,7 +35,7 @@ export default class SparParser extends PdfParser {
         return true
       }
       if (ALL_DAYS.some((day) => line.toUpperCase().startsWith(day))) {
-        let dates = findDatesISO(line)
+        const dates = findDatesISO(line)
         if (dates.length) {
           addOffer()
           var date = dates[0]

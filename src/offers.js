@@ -90,8 +90,8 @@ function extractOffers (posts, parser) {
   if (!Array.isArray(posts)) {
     posts = [posts]
   }
-  for (let post of posts) {
-    let offers = parser.parse(post)
+  for (const post of posts) {
+    const offers = parser.parse(post)
     if (offers) {
       return offers
     }

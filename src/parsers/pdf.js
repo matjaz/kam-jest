@@ -18,8 +18,8 @@ export default class PdfParser {
 
   getLines (parsedPdf) {
     var lines = []
-    for (let page of parsedPdf.Pages) {
-      for (let text of page.Texts) {
+    for (const page of parsedPdf.Pages) {
+      for (const text of page.Texts) {
         lines.push(text.R.map((o) => decodeURIComponent(o.T)).join(' ').trim())
       }
     }
