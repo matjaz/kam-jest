@@ -49,7 +49,7 @@ export default class DaNoiParser {
       }
       if (ALL_DAYS.some((day) => line.toUpperCase().includes(day.slice(0, 4)))) {
         allergens = undefined
-        let dates = findDatesISO(line)
+        const dates = findDatesISO(line)
         if (dates.length) {
           var date = dates[0]
           offers = offers || {}

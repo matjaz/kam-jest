@@ -7,7 +7,7 @@ export function findDates (str) {
   var dates = []
   while ((match = re.exec(str))) {
     // moment() compatible (zero based month)
-    let d = {
+    const d = {
       day: parseFloat(match[1]),
       month: parseFloat(match[2]) - 1,
       year: (match[3] && parseFloat(match[3])) || undefined
@@ -47,7 +47,7 @@ export function addToDate (date, days) {
 
 export function getValue (value, mapper) {
   if (value) {
-    let not = value.charAt(0) === '!'
+    const not = value.charAt(0) === '!'
     if (not) {
       value = value.slice(1)
     }

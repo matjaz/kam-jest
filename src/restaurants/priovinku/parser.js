@@ -22,7 +22,7 @@ export default class PriOvinkuParser {
         }
       }
       week = week || {}
-      let dayData = week[date] || (week[date] = { offers: [] })
+      const dayData = week[date] || (week[date] = { offers: [] })
       dayOffers = dayData.offers
       lines.some((line) => {
         line = line.trim()
@@ -42,10 +42,10 @@ export default class PriOvinkuParser {
           if (!line) {
             return
           }
-          let price = getPrice(line)
+          const price = getPrice(line)
           let text
           let allergens
-          let lineMatch = line.match(/(?:\s*\*?)(.*?)\s*\((.*?)\)\s*\d*,?\d*.?$/)
+          const lineMatch = line.match(/(?:\s*\*?)(.*?)\s*\((.*?)\)\s*\d*,?\d*.?$/)
           if (lineMatch) {
             allergens = lineMatch[2].split(',').map((x) => x.trim())
             text = lineMatch[1]

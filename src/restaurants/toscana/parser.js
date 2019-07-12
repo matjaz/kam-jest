@@ -22,7 +22,7 @@ export default class ToscanaParser {
           if (!week) {
             week = {}
           }
-          let dayData = week[date] || (week[date] = { offers: [] })
+          const dayData = week[date] || (week[date] = { offers: [] })
           dayOffers = dayData.offers
         } else if (line && dayOffers) {
           dayOffers.push({

@@ -14,9 +14,9 @@ app.get('/', function (req, res) {
   res.send('<a href="https://github.com/matjaz/kam-jest">kam-jest</a>')
 })
 
-let server = app.listen(process.env.PORT || 3000, function () {
-  let host = server.address().address
-  let port = server.address().port
+const server = app.listen(process.env.PORT || 3000, function () {
+  const host = server.address().address
+  const port = server.address().port
 
   console.log('Server listening at http://%s:%s', host, port)
 })

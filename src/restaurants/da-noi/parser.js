@@ -43,7 +43,7 @@ export default class DaNoiParser {
         return true
       }
       if (ALL_DAYS.some((day) => line.toUpperCase().startsWith(day.slice(0, 3)))) {
-        let date = extractDate(line)
+        const date = extractDate(line)
         if (date) {
           addOffer()
           offers = offers || {}
