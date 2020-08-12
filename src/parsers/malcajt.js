@@ -10,7 +10,7 @@ export default class MalcajtParser {
       offers = {}
       Lunch.forEach(l => {
         const dayOffers = []
-        const lines = typeof l.DayLunches === 'string' ? getLines(l.DayLunches.replace(/<br\s*?\/?>/g, '')) : l.DayLunches
+        const lines = typeof l.DayLunches === 'string' ? getLines(l.DayLunches.replace(/<br\s*?\/?>/g, '\n')) : l.DayLunches
         lines.forEach(text => {
           text = text.trim()
           if (text) {
