@@ -86,6 +86,7 @@ const RestaurantDailyOffer = new GraphQLObjectType({
   description: 'Restaurant Daily Offer',
   fields: {
     date: { type: GraphQLString },
+    offersImages: { type: new GraphQLList(GraphQLString) },
     offers: { type: new GraphQLList(RestaurantOffer) },
     special: { type: new GraphQLList(RestaurantOffer) }
   }

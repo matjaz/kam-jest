@@ -69,11 +69,13 @@ export async function getDailyOffers (restaurantId, args) {
   }
   return dates.map((date) => {
     var offers = (allOffers[date] && allOffers[date].offers) || []
+    var offersImages = allOffers[date] && allOffers[date].offersImages
     if (filterFn && offers.length) {
       offers = offers.filter(filterFn)
     }
     return {
       offers,
+      offersImages,
       date
     }
   })
