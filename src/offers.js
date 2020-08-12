@@ -38,7 +38,8 @@ export async function getDailyOffers (restaurantId, args) {
   var filterFn
   var { date } = args
   var type = getValue(args.type, (x) => OfferTypes.from(x))
-  var allOffers = await findOffers(restaurantId)
+  var restaurant = getRestaurant(restaurantId)
+  var allOffers = await findOffers(restaurant.provider(), restaurant.parser())
   if (!allOffers) {
     return []
   }
@@ -78,11 +79,10 @@ export async function getDailyOffers (restaurantId, args) {
   })
 }
 
-async function findOffers (restaurantId) {
-  var restaurant = getRestaurant(restaurantId)
-  var posts = await restaurant.provider().fetch()
+async function findOffers (provider, parser) {
+  var posts = await provider.fetch()
   if (posts) {
-    return extractOffers(posts, restaurant.parser())
+    return extractOffers(posts, parser)
   }
 }
 
@@ -91,9 +91,9 @@ function extractOffers (posts, parser) {
     posts = [posts]
   }
   for (const post of posts) {
-    const offers = parser.parse(post)
-    if (offers) {
-      return offers
+    const result = parser.parse(post)
+    if (result) {
+      return result
     }
   }
 }

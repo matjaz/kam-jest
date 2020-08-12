@@ -12,11 +12,13 @@ export function getRestaurant (restaurantId) {
     try {
       var Provider = require(`./providers/${m[1]}`).default
     } catch (e) {
+      console.error(e)
       throw new Error(`Unknown provider ${m[1]}`)
     }
     try {
       var Parser = require(`./parsers/${m[3]}`).default
     } catch (e) {
+      console.error(e)
       throw new Error(`Unknown parser ${m[3]}`)
     }
     return {
@@ -29,10 +31,11 @@ export function getRestaurant (restaurantId) {
       async data () {
         if (Parser.prototype.parseData) {
           let body
-          if (Provider.prototype.fetchData) {
-            body = await this.provider().fetchData()
+          const provider = this.provider()
+          if (provider.fetchData) {
+            body = await provider.fetchData()
           } else {
-            body = await this.provider().fetch()
+            body = await provider.fetch()
           }
           return this.parser().parseData(body)
         }
