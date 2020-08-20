@@ -2,7 +2,7 @@ import FacebookMBasicProvider from '../../providers/facebookBasic'
 import Parser from './parser'
 
 export function provider () {
-  return new FacebookMBasicProvider('Gostilna-pri-Pošti-285309012417238')
+  return new FacebookMBasicProvider('Gostilna-pri-Po%C5%A1ti-285309012417238')
 }
 
 export function parser () {
