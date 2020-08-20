@@ -23,27 +23,17 @@ async function parsePhotoPage (linkPath) {
 export default class FBBasicPostParser {
   async parse (data) {
     const $ = cheerio.load(data)
-    const stories = $('article[data-ft]')
-    const story = stories[0]
-    try {
-      const $story = $(story)
-      const fbData = $story.attr('data-ft')
-      const raw = JSON.parse(fbData)
-      const pageInsights = raw.page_insights && raw.page_insights[raw.page_id]
-      const postContext = pageInsights && pageInsights.post_context
-      const publishTime = postContext && postContext.publish_time
-      if (publishTime) {
-        const attachLinkList = $story.find('div > div > a').toArray().map(x => $(x).attr('href'))
-        const offersImages = await Promise.all(attachLinkList.map(link => parsePhotoPage(link)))
-        const date = toISODate(1000 * publishTime)
-        return {
-          [date]: {
-            offersImages
-          }
+    const $story = $('article[data-ft]').first()
+    const publishTime = FBBasicPostParser.articlePublishTime($story)
+    if (publishTime) {
+      const attachLinkList = $story.find('div > div > a').toArray().map(x => $(x).attr('href'))
+      const offersImages = await Promise.all(attachLinkList.map(link => parsePhotoPage(link)))
+      const date = toISODate(1000 * publishTime)
+      return {
+        [date]: {
+          offersImages
         }
       }
-    } catch (e) {
-
     }
   }
 
@@ -51,6 +41,23 @@ export default class FBBasicPostParser {
     const $ = cheerio.load(data)
     return {
       name: $('#m-timeline-cover-section h1 span').text()
+    }
+  }
+
+  static articleData (articleEl) {
+    try {
+      const fbData = articleEl.attr('data-ft')
+      return JSON.parse(fbData)
+    } catch (e) {
+    }
+  }
+
+  static articlePublishTime (articleEl) {
+    const raw = FBBasicPostParser.articleData(articleEl)
+    if (raw) {
+      const pageInsights = raw.page_insights && raw.page_insights[raw.page_id]
+      const postContext = pageInsights && pageInsights.post_context
+      return postContext && postContext.publish_time
     }
   }
 }
