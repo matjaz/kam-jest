@@ -1,4 +1,4 @@
-import { findDatesISO } from '../../util'
+import { findDatesISO, getPrice } from '../../util'
 import { OfferTypes } from '../../offers'
 
 import cheerio from 'cheerio'
@@ -16,9 +16,18 @@ export default class DePonchoParser {
       var el = $(this)
       if (el.is('ul')) {
         el.find('li').each(function () {
-          var text = $(this).text()
+          var text = $(this).text().trim()
           if (!text || !dayOffers || text.startsWith('Dnevna')) {
             return
+          }
+          var price = DEFAULT_PRICE
+          var m = text.match(/\s(\d+(,\d+)?)\s+EUR/)
+          if (m) {
+            const pPrice = getPrice(m[1])
+            if (pPrice) {
+              price = pPrice
+              text = text.slice(0, m.index).trim()
+            }
           }
           var allergens
           var match = text.match(/(?:\w+\s*\d:\s*)?(.*?)\s*\((?:\w+:)(.*?)\)\s*\d*,?\d*.?$/)
@@ -29,7 +38,7 @@ export default class DePonchoParser {
             allergens = []
           }
           dayOffers.push({
-            price: DEFAULT_PRICE,
+            price,
             text,
             allergens,
             type
