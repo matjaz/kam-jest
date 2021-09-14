@@ -29,6 +29,7 @@
     "graphql": "^14.0.2",
     "html-to-text": "^5.0.0",
     "moment": "^2.24.0",
+    "ocr-space-api-wrapper": "^1.0.6",
     "pdf2json": "^1.1.5",
     "request": "^2.79.0",
     "request-promise": "^4.1.1"
