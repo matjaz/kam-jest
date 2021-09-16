@@ -8,11 +8,11 @@ export default class RozikaProvider {
       const browserResult = await rp({
         method: 'POST',
         uri: process.env.BROWSER_PROVIDER_URL,
-        body: 'text=rozika&type=json',
+        body: 'text=rozika',
       })
       const jsonData = JSON.parse(browserResult)
-      if (jsonData.text && jsonData.text.startsWith('http')) {
-        const imageUrl = jsonData.text
+      if (jsonData.images && jsonData.images[0]) {
+        const imageUrl = jsonData.images[0]
         const ocrResult = await ocrSpace(imageUrl, {
           language: 'slv',
         })
