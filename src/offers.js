@@ -23,6 +23,8 @@ export const OfferTypes = {
   MALICA: 2,
   ZLICA: 3,
   VEGE: 4,
+  SOLATA: 5,
+  SLADICA: 6,
   from (val, lax) {
     if (typeof this[val] === 'number') {
       return this[val]

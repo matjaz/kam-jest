@@ -1,4 +1,5 @@
 import moment from 'moment'
+import ocrSpace from 'ocr-space-api-wrapper'
 
 export function findDates (str) {
   // dd. mm. yyyy
@@ -74,5 +75,19 @@ export function requiredInPair (pair) {
   const [a, b] = [pair[keys[0]], pair[keys[1]]]
   if ((a == null && b != null) || (a != null && b == null)) {
     throw new Error(`required pair ${keys}`)
+  }
+}
+
+export async function ocr (imageUrl) {
+  try {
+    const ocrResult = await ocrSpace(imageUrl, {
+      language: 'slv',
+    })
+    if (ocrResult && ocrResult.OCRExitCode === 1) {
+      ocrResult.imageUrl = imageUrl
+      return ocrResult
+    }
+  } catch (err) {
+    console.error(err)
   }
 }
