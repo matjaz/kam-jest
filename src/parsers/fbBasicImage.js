@@ -1,3 +1,4 @@
+import { OfferTypes } from '../offers'
 import { ocr } from '../util'
 import FBBasicPostParser from './fbBasicPost'
 
@@ -16,12 +17,14 @@ export default class FBBasicImageParser extends FBBasicPostParser {
     }
     const ocrData = await ocr(imageUrl)
     if (ocrData) {
+      const type = OfferTypes.MALICA
       const text = ocrData.ParsedResults[0] && ocrData.ParsedResults[0].ParsedText
       return {
         [date]: {
           ...postDayData,
           offers: [{
             text,
+            type,
           }],
         }
       }
