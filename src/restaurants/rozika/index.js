@@ -1,8 +1,8 @@
-import Provider from './provider'
+import FacebookMBasicProvider from '../../providers/facebookBasic'
 import Parser from './parser'
 
 export function provider () {
-  return new Provider()
+  return new FacebookMBasicProvider('GostilnaRozika')
 }
 
 export function parser () {

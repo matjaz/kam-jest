@@ -1,19 +1,25 @@
-import { getLines, toISODate } from '../../util'
+import { getLines, ocr, toISODate } from '../../util'
 import { OfferTypes } from '../../offers'
+import FBBasicImageParser from '../../parsers/fbBasicImage'
 
-export default class RozikaParser {
-  parse (data) {
-    const text = data.ParsedResults[0] && data.ParsedResults[0].ParsedText
+export default class RozikaParser extends FBBasicImageParser {
+  async parse (data) {
+    data = await super.parse(data)
+    if (!data) {
+      return
+    }
+    const dates = Object.keys(data)
+    const currentDate = dates[0]
+    const { offers } = data[currentDate]
+    const { text } = offers[0]
     const lines = text && getLines(text)
     if (lines) {
       let offers = []
       const type = OfferTypes.MALICA
-      const date = toISODate(new Date())
-      const offersImages = data.imageUrl && [data.imageUrl]
       const week = {
-        [date]: {
+        [currentDate]: {
+          ...data[currentDate],
           offers,
-          offersImages,
         }
       }
       let state = 0 // 0=idle, 1=daily, 2=regular, 3=end
