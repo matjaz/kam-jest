@@ -41,10 +41,6 @@ export function getRestaurant (restaurantId) {
         }
         return {
           name: m[0],
-          location: {
-            lat: undefined,
-            lon: undefined
-          }
         }
       }
     }
